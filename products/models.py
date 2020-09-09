@@ -16,7 +16,7 @@ class Exercise(models.Model):
     # columns in the table
     title = models.CharField(blank=False, max_length=255)
     description = models.CharField(blank=False, max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=3, blank=False)
+    price = models.PositiveIntegerField(blank=False)
     exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
 
     # to make string

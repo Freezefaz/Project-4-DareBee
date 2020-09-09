@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
     # columns in the table
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(blank=False, max_length=255)
     last_name = models.CharField(blank=False, max_length=255)
     email = models.CharField(blank=False, max_length=255)
@@ -26,5 +27,6 @@ class Profile(models.Model):
 
     # make to string
     def __str__(self):
-        return self.customer["first_name"] + " " + self.customer["last_name"]
+        # return self.customer["first_name"] + " " + self.customer["last_name"]
+        return self.customer
 

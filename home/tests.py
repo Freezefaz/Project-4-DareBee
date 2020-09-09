@@ -6,3 +6,4 @@ class HomeTestViews(TestCase):
         # simulate browswer going to URL
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "home/welcome.template.html")

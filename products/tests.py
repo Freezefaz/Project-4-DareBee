@@ -11,6 +11,6 @@ from django.test import TestCase
 class ProductsTestView(TestCase):
     def test_products_page(self):
         # simulate going to products page
-        response = self.client.get("/")
+        response = self.client.get("/products/")
         # check if it goes to the exact page
         self.assertEqual(response.status_code, 200)

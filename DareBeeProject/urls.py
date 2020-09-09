@@ -15,12 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import products.views
 
 # makemigration and migrate first before adding path
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls'))
-    # path('products/', include('products.urls')
+    path('', include('home.urls')),
+    path('products/', include('products.urls'))
 
 ]

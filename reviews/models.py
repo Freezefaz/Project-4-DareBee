@@ -17,7 +17,7 @@ class ExerciseReview(models.Model):
 
 
 class MealplanReview(models.Model):
-    #columns in the table
+    # columns in the table
     title = models.CharField(blank=False, max_length=255)
     content = models.CharField(blank=False, max_length=255)
     datetime = models.DateTimeField(auto_now=False)

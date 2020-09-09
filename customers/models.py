@@ -21,12 +21,11 @@ class Profile(models.Model):
     # columns in the table
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     dob = models.DateField(blank=False)
-    height = models.IntegerField(blank=False)
-    weight = models.IntegerField(blank=False)
+    height = models.PositiveIntegerField(blank=False)
+    weight = models.PositiveIntegerField(blank=False)
     goals = models.CharField(blank=False, max_length=255)
 
     # make to string
     def __str__(self):
-        # return self.customer["first_name"] + " " + self.customer["last_name"]
         return self.customer
 

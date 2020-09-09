@@ -4,4 +4,5 @@ from django.shortcuts import render, HttpResponse
 
 
 def index(request):
-    return HttpResponse("Products")
+    # return HttpResponse("Products")
+    return render(request, "products/index_product.template.html")

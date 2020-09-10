@@ -9,7 +9,7 @@ urlpatterns = [
     #  it is _id NOT .id!!
     path("exercise/update/<exercise_id>", products.views.update_exercise,
          name="update_exercise"),
-    path("exercise/delete/<exercise_id>", products.views.update_exercise,
+    path("exercise/delete/<exercise_id>", products.views.delete_exercise,
          name="delete_exercise")
 
 ]

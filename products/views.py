@@ -57,5 +57,12 @@ def update_exercise(request, exercise_id):
 
 
 def delete_exercise(request, exercise_id):
-    return HttpResponse("Delete Exercise")
-    
+    # return HttpResponse("Delete Exercise")
+    book_to_delete = get_object_or_404(Exercise, pk=exercise_id)
+    if request.method == "POST":
+        book_to_delete.delete()
+        return redirect(show_exercise)
+    else:
+        return render(request, "products/delete_exercise.template.html", {
+            "exercise": book_to_delete
+        })

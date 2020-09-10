@@ -1,0 +1,15 @@
+{%extends 'base.template.html'%}
+{% load crispy_forms_tags %}
+
+{%block title%}Delete Exercise{%endblock%}
+
+{%block content%}
+
+<form method="POST">
+	{% csrf_token %}
+	Are you sure you want to delete {{exercise.title}}
+	<input type="submit" value="Yes, delete"/>
+    <a href="{% url 'view_all_exercise' %}">No</a>
+</form>
+
+{%endblock%}

@@ -35,4 +35,11 @@ def create_exercise(request):
     # return HttpResponse("Create Exercise")
 
 def update_exercise(request, exercise_id):
-    return HttpResponse("Update Exercise")
+    # return HttpResponse("Update Exercise")
+    # retrieve book that we are updating
+    exercise_to_update = get_object_or_404(Exercise, pk=exercise_id)
+    # create form and fill it with data
+    exercise_form = ExerciseForm(instance=exercise_to_update)
+    return render(request, "products/update_exercise.template.html", {
+        "form": exercise_form
+    })

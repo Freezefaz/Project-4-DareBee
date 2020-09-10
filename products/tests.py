@@ -43,5 +43,7 @@ class ExerciseTestView(TestCase):
         exercise = Exercise(title="Foundation", description="Easy",
                             price="20", exercise_type=self.exercise_type)
         exercise.save()
-        response = self.client.get("/products/exercise/update/{exercise.id}")
+        response = self.client.get(f"/products/exercise/update/{exercise.id}")
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/update_exercise.template.html")

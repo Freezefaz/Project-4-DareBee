@@ -54,3 +54,8 @@ def update_exercise(request, exercise_id):
         return render(request, "products/update_exercise.template.html", {
             "form": exercise_form
         })
+
+
+def delete_exercise(request, exercise_id):
+    return HttpResponse("Delete Exercise")
+    

@@ -25,3 +25,7 @@ class ExerciseTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/show_exercise.template.html")
+
+    def test_create_exercise_page(self):
+        response = self.client.get("products/exercise/create/")
+        self.assertEqual(response.status_code, 200)

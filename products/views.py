@@ -12,7 +12,10 @@ def index(request):
 # show only all exercise page
 def show_exercise(request):
     # return HttpResponse("Exercise")
-    return render(request, "products/show_exercise.template.html")
+    all_exercises = Exercise.objects.all()
+    return render(request, "products/show_exercise.template.html", {
+        "all_exercises":all_exercises
+    })
 
 # create exercise
 def create_exercise(request):

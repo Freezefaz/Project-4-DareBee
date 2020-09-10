@@ -6,5 +6,10 @@
 {% block content %}
 
     <h1>All Exercises</h1>
+    	{% for each_exercise in all_exercises %}
+	<li>
+		{{each_exercise.title}}
+	</li>
+	{% endfor %}
 
 {% endblock %}

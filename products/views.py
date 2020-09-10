@@ -41,8 +41,16 @@ def update_exercise(request, exercise_id):
     # return HttpResponse("Update Exercise")
     # retrieve book that we are updating
     exercise_to_update = get_object_or_404(Exercise, pk=exercise_id)
-    # create form and fill it with data
-    exercise_form = ExerciseForm(instance=exercise_to_update)
-    return render(request, "products/update_exercise.template.html", {
-        "form": exercise_form
-    })
+    # if update form is submitted
+    if request.method == "POST":
+        # create form and fill in data to existing form
+        exercise_form = ExerciseForm(request.POST, instance=exercise_to_update)
+        if exercise_form.is_valid():
+            exercise_form.save()
+            return redirect(reverse(show_exercise))
+    else:
+        # create form and fill it with data
+        exercise_form = ExerciseForm(instance=exercise_to_update)
+        return render(request, "products/update_exercise.template.html", {
+            "form": exercise_form
+        })

@@ -24,7 +24,7 @@ def create_exercise(request):
         # check if created form have valid values
         if create_form.is_valid():
             create_form.save()
-            return redirect(reverse(index))
+            return redirect(reverse(show_exercise))
         else:
             # if does not have any valid values and re-render the form
             return render(request, "products/create_exercise.template.html", {

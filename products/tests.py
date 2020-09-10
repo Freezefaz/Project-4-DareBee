@@ -55,3 +55,5 @@ class ExerciseTestView(TestCase):
         exercise.save()
         response = self.client.get(f"/products/exercise/delete/{exercise.id}")
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/delete_exercise.template.html")

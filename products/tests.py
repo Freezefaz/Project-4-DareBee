@@ -1,4 +1,5 @@
 from django.test import TestCase
+from .models import Exercise, ExerciseType
 
 # for testing cases
 # 1st test will fail as no write up
@@ -32,6 +33,15 @@ class ExerciseTestView(TestCase):
         self.assertTemplateUsed(
             response, "products/create_exercise.template.html")
 
+    # To create a test exercise type
+    def setUp(self):
+        self.exercise_type = ExerciseType(type="beginner")
+        self.exercise_type.save()
+
     def test_update_exercise_page(self):
+        # to create a test exercise to retrieve id
+        exercise = Exercise(title="Foundation", description="Easy",
+                            price="20", exercise_type=self.exercise_type)
+        exercise.save()
         response = self.client.get("/products/exercise/update/{exercise.id}")
         self.assertEqual(response.status_code, 200)

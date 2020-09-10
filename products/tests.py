@@ -30,4 +30,8 @@ class ExerciseTestView(TestCase):
         response = self.client.get("/products/exercise/create/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-             response, "products/create_exercise.template.html")
+            response, "products/create_exercise.template.html")
+
+    def test_update_exercise_page(self):
+        response = self.client.get("/products/exercise/update/{exercise.id}")
+        self.assertEqual(response.status_code, 200)

@@ -47,3 +47,11 @@ class ExerciseTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/update_exercise.template.html")
+
+    def test_delete_exercise_page(self):
+        # to create a test exercise to retrieve id
+        exercise = Exercise(title="Foundation", description="Easy",
+                            price="20", exercise_type=self.exercise_type)
+        exercise.save()
+        response = self.client.get(f"/products/exercise/delete/{exercise.id}")
+        self.assertEqual(response.status_code, 200)

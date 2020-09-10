@@ -6,10 +6,15 @@
 {% block content %}
 
     <h1>All Exercises</h1>
-    	{% for each_exercise in all_exercises %}
-	<li>
-		{{each_exercise.title}}
-	</li>
+        <ul>
+            {% for each_exercise in all_exercises %}
+            <li>
+                {{each_exercise.title}}
+                <a href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Edit</a>
+                <a href="{% url 'delete_exercise_route' exercise_id=each_exercise.id%}">Delete</a>
+
+            </li>
+        </ul>
 	{% endfor %}
 
 {% endblock %}

@@ -8,8 +8,8 @@ urlpatterns = [
          name="create_exercise"),
     #  it is _id NOT .id!!
     path("exercise/update/<exercise_id>", products.views.update_exercise,
-         name="update_exercise"),
+         name="update_exercise_route"),
     path("exercise/delete/<exercise_id>", products.views.delete_exercise,
-         name="delete_exercise")
+         name="delete_exercise_route")
 
 ]

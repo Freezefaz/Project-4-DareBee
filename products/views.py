@@ -9,5 +9,5 @@ def index(request):
 
 # show only all exercise page
 def show_exercise(request):
-    return HttpResponse("Exercise")
-    # return render(request, "products/index_product.template.html")
+    # return HttpResponse("Exercise")
+    return render(request, "products/show_exercise.template.html")

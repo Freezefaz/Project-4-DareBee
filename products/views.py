@@ -11,3 +11,7 @@ def index(request):
 def show_exercise(request):
     # return HttpResponse("Exercise")
     return render(request, "products/show_exercise.template.html")
+
+# create exercise
+def create_exercise(request):
+    return HttpResponse("Create Exercise")

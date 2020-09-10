@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect, reverse
 from .forms import ExerciseForm
 
 # Create your views here.
@@ -21,8 +21,20 @@ def show_exercise(request):
 
 
 def create_exercise(request):
-    create_form = ExerciseForm()
-    return render(request, "products/create_exercise.template.html", {
-        "form": create_form
-    })
+    if request.method == "POST":
+        create_form = ExerciseForm(request.POST)
+        # check if created form have valid values
+        if create_form.is_valid():
+            create_form.save()
+            return redirect(reverse(index))
+        else:
+            # if does not have any valid values and re-render the form
+            return render(request, "products/create_exercise.template.html", {
+            "form": create_form
+        })
+    else:
+        create_form = ExerciseForm()
+        return render(request, "products/create_exercise.template.html", {
+            "form": create_form
+        })
     # return HttpResponse("Create Exercise")

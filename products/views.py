@@ -1,4 +1,4 @@
-from .forms import ExerciseForm
+from .forms import ExerciseForm, MealplanForm
 from .models import Exercise, Mealplan
 from django.shortcuts import render, HttpResponse,redirect, reverse, get_object_or_404
 
@@ -81,8 +81,11 @@ def show_mealplans(request):
 
 # create mealplan
 def create_mealplan(request):
-    return HttpResponse("Create Mealplan")
+    # return HttpResponse("Create Mealplan")
+    create_form = MealplanForm()
+    return render(request, "products/create_mealplan.template.html", {
+        "form": create_form
+    })
 
 
 
-    

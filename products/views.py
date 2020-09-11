@@ -1,24 +1,30 @@
 from .forms import ExerciseForm, MealplanForm
 from .models import Exercise, Mealplan
-from django.shortcuts import render, HttpResponse,redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 
 # Create your views here.
 
 # show product pages
+
+
 def index(request):
     # return HttpResponse("Products")
     return render(request, "products/index_product.template.html")
 
 # Start of Exercise
 # show only all exercise page
+
+
 def show_exercise(request):
     # return HttpResponse("Exercise")
     all_exercises = Exercise.objects.all()
     return render(request, "products/show_exercise.template.html", {
-        "all_exercises":all_exercises
+        "all_exercises": all_exercises
     })
 
 # create exercise
+
+
 def create_exercise(request):
     if request.method == "POST":
         create_form = ExerciseForm(request.POST)
@@ -37,6 +43,7 @@ def create_exercise(request):
             "form": create_form
         })
     # return HttpResponse("Create Exercise")
+
 
 def update_exercise(request, exercise_id):
     # return HttpResponse("Update Exercise")
@@ -59,13 +66,13 @@ def update_exercise(request, exercise_id):
 
 def delete_exercise(request, exercise_id):
     # return HttpResponse("Delete Exercise")
-    book_to_delete = get_object_or_404(Exercise, pk=exercise_id)
+    exercise_to_delete = get_object_or_404(Exercise, pk=exercise_id)
     if request.method == "POST":
-        book_to_delete.delete()
+        exercise_to_delete.delete()
         return redirect(show_exercise)
     else:
         return render(request, "products/delete_exercise.template.html", {
-            "exercise": book_to_delete
+            "exercise": exercise_to_delete
         })
 # End of Exercise
 
@@ -80,6 +87,8 @@ def show_mealplans(request):
     })
 
 # create mealplan
+
+
 def create_mealplan(request):
     # return HttpResponse("Create Mealplan")
     if request.method == "POST":
@@ -100,6 +109,12 @@ def create_mealplan(request):
         })
 
 # update mealplan
-def update_mealplan(request, mealplan_id):
-    return HttpResponse("Update Mealplan")
 
+
+def update_mealplan(request, mealplan_id):
+    # return HttpResponse("Update Mealplan")
+    mealplan_to_update = get_object_or_404(Mealplan, pk=mealplan_id)
+    mealplan_form = MealplanForm(instance=mealplan_to_update)
+    return render(request, "products/update_mealplan.template.html", {
+        "form": mealplan_form
+    })

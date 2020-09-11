@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Exercise, ExerciseType
+from .models import Exercise, ExerciseType, Mealplan, MealplanType
 
 # for testing cases
 # 1st test will fail as no write up
@@ -57,3 +57,11 @@ class ExerciseTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/delete_exercise.template.html")
+
+
+class MealplansTestView(TestCase):
+    def test_mealplans_page(self):
+        # simulate going to products page
+        response = self.client.get("/mealplans/")
+        # check if it goes to the exact page
+        self.assertEqual(response.status_code, 200)

@@ -88,4 +88,12 @@ class MealplansTestView(TestCase):
         response = self.client.get(f"/products/mealplans/update/{mealplan.id}")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-             response, "products/update_mealplan.template.html")
+            response, "products/update_mealplan.template.html")
+
+    def test_delete_mealplan_page(self):
+        mealplan = Mealplan(title="Muscle", description="Tough",
+                            price="20", mealplan_type=self.mealplan_type)
+        mealplan.save()
+        response = self.client.get(
+            f"/products/mealplans/delete/{mealplan.id}")
+        self.assertEqual(response.status_code, 200)

@@ -9,7 +9,8 @@
 <ul>
     {%for each_mealplan in all_mealplans%}
     <li>
-        {{each_mealplan.title}}s
+        {{each_mealplan.title}}
+        <a href="{% url 'update_mealplan_route' mealplan_id=each_mealplan.id%}">Edit</a>
     </li>
     {%endfor%}
 </ul>

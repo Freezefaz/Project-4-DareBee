@@ -1,15 +1,14 @@
 {%extends 'base.template.html'%}
-{% load crispy_forms_tags %}
+{%load crispy_forms_tag%}
 
-{%block title%} Update Exercise {%endblock%}S
+{%block title%} Update Mealplan {%endblock%}
 
 {%block content%}
-<h1>Update Exercise</h1>
 
 <form method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
+    {% csrf_token %}
 	{{form|crispy}}
 	<input type="submit"/>
-    </form>
+</form>
 
 {%endblock%}

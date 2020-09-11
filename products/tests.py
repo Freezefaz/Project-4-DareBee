@@ -6,6 +6,7 @@ from .models import Exercise, ExerciseType, Mealplan, MealplanType
 # Commit first
 # Then go settings.py to add url
 # then go urls to add path
+# NEED TO HAVE TEST AT FROM OF DEF IF NOT WON'T BE RECOGNISED AS TEST!
 
 
 # Create your tests here.
@@ -65,6 +66,11 @@ class MealplansTestView(TestCase):
         response = self.client.get("/products/mealplans/")
         # check if it goes to the exact page
         self.assertEqual(response.status_code, 200)
+        # check if it goes to the template
         self.assertTemplateUsed(
             response, "products/show_mealplans.template.html"
         )
+
+    def test_create_mealplans_page(self):
+        response = self.client.get("products/mealplans/create/")
+        self.assertEqual(response.status_code, 200)

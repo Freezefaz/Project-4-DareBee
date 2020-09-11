@@ -141,7 +141,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 
     # allauth authentication system, such as login usning email
-    'allauth.account.auth_backends.AuthenticationBackend'
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SITE_ID = 1
@@ -170,4 +170,5 @@ LOGIN_REDIRECT_URL = '/success'
 # simulate Django send email but gitpod don't allow
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     # my apps
     'home',
     'products',
@@ -129,3 +134,40 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# For Allauth
+AUTHENTICATION_BACKENDS = (
+    # default login method (for logging into the admin backend)
+    'django.contrib.auth.backends.ModelBackend',
+
+    # allauth authentication system, such as login usning email
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+SITE_ID = 1
+
+# allows the user to login/register via a username or email
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+# the user must specify an email address
+ACCOUNT_EMAIL_REQUIRED = True
+
+# whether the user must verify their email
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# asks the user to enter their email twice
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
+# minimal length of the user name
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# the url to go to display the login page
+LOGIN_URL = '/accounts/login/'
+
+# the url to go to if the user has logged in successful
+LOGIN_REDIRECT_URL = '/success'
+
+# simulate Django send email but gitpod don't allow
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

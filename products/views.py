@@ -128,3 +128,7 @@ def update_mealplan(request, mealplan_id):
         return render(request, "products/update_mealplan.template.html", {
             "form": mealplan_form
         })
+
+
+def delete_mealplan(request, mealplan_id):
+    return HttpResponse("Delete")

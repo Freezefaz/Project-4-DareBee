@@ -62,6 +62,6 @@ class ExerciseTestView(TestCase):
 class MealplansTestView(TestCase):
     def test_mealplans_page(self):
         # simulate going to products page
-        response = self.client.get("/mealplans/")
+        response = self.client.get("/products/mealplans/")
         # check if it goes to the exact page
         self.assertEqual(response.status_code, 200)

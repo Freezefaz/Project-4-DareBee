@@ -9,6 +9,7 @@ def index(request):
     # return HttpResponse("Products")
     return render(request, "products/index_product.template.html")
 
+# Start of Exercise
 # show only all exercise page
 def show_exercise(request):
     # return HttpResponse("Exercise")
@@ -66,3 +67,10 @@ def delete_exercise(request, exercise_id):
         return render(request, "products/delete_exercise.template.html", {
             "exercise": book_to_delete
         })
+# End of Exercise
+
+
+# Start of Mealplans
+# show all mealplans
+def show_mealplans(request):
+    return HttpResponse("Mealplans")

@@ -10,6 +10,8 @@ urlpatterns = [
     path("exercise/update/<exercise_id>", products.views.update_exercise,
          name="update_exercise_route"),
     path("exercise/delete/<exercise_id>", products.views.delete_exercise,
-         name="delete_exercise_route")
+         name="delete_exercise_route"),
+    path("mealplans/", products.views.show_mealplans,
+         name="view_all_mealplans")
 
 ]

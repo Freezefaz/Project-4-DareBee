@@ -1,14 +1,14 @@
 {%extends 'base.template.html'%}
 
-{%block title%}Delete Exercise{%endblock%}
+{%block title%}Delete Mealplan{%endblock%}
 
 {%block content%}
 
 <form method="POST">
 	{% csrf_token %}
-	Are you sure you want to delete {{exercise.title}}
+	Are you sure you want to delete {{mealplan.title}}
 	<input type="submit" value="Yes, delete"/>
-    <a href="{% url 'view_all_exercise' %}">No</a>
+    <a href="{% url 'view_all_mealplans_route' %}">No</a>
 </form>
 
 {%endblock%}

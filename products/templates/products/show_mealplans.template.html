@@ -11,6 +11,7 @@
     <li>
         {{each_mealplan.title}}
         <a href="{% url 'update_mealplan_route' mealplan_id=each_mealplan.id%}">Edit</a>
+        <a href="{% url 'delete_mealplan_route' mealplan_id=each_mealplan.id%}">Delete</a>
     </li>
     {%endfor%}
 </ul>

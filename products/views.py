@@ -78,3 +78,11 @@ def show_mealplans(request):
     return render(request, "products/show_mealplans.template.html", {
         "all_mealplans": all_mealplans
     })
+
+# create mealplan
+def create_mealplan(request):
+    return HttpResponse("Create Mealplan")
+
+
+
+    

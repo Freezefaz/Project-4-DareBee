@@ -72,5 +72,5 @@ class MealplansTestView(TestCase):
         )
 
     def test_create_mealplans_page(self):
-        response = self.client.get("products/mealplans/create/")
+        response = self.client.get("/products/mealplans/create/")
         self.assertEqual(response.status_code, 200)

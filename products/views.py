@@ -131,4 +131,12 @@ def update_mealplan(request, mealplan_id):
 
 
 def delete_mealplan(request, mealplan_id):
-    return HttpResponse("Delete")
+    # return HttpResponse("Delete")
+    mealplan_to_delete = get_object_or_404(Mealplan, pk=mealplan_id)
+    if request.method == "POST":
+        mealplan_to_delete.delete()
+        return redirect(show_mealplans)
+    else:
+        return render(request, "products/delete_mealplan.template.html", {
+            "mealplan": mealplan_to_delete
+        })

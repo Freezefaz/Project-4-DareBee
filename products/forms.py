@@ -7,6 +7,7 @@ class ExerciseForm(forms.ModelForm):
         model = Exercise
         exclude = ("type",)
 
+
 class MealplanForm(forms.ModelForm):
     class Meta:
         model = Mealplan

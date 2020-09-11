@@ -99,5 +99,7 @@ def create_mealplan(request):
             "form": create_form
         })
 
-
+# update mealplan
+def update_mealplan(request, mealplan_id):
+    return HttpResponse("Update Mealplan")
 

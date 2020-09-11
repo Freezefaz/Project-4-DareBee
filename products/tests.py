@@ -65,3 +65,6 @@ class MealplansTestView(TestCase):
         response = self.client.get("/products/mealplans/")
         # check if it goes to the exact page
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/show_mealplans.template.html"
+        )

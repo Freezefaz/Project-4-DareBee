@@ -82,10 +82,22 @@ def show_mealplans(request):
 # create mealplan
 def create_mealplan(request):
     # return HttpResponse("Create Mealplan")
-    create_form = MealplanForm()
-    return render(request, "products/create_mealplan.template.html", {
-        "form": create_form
-    })
+    if request.method == "POST":
+        create_form = MealplanForm(request.POST)
+        # check if form have valid values
+        if create_form.is_valid():
+            create_form.save()
+            return redirect(reverse(show_mealplans))
+        else:
+            # if no valid values, re-render form
+            return render(request, "products/create_mealplan.template.html", {
+                "form": create_form
+            })
+    else:
+        create_form = MealplanForm()
+        return render(request, "products/create_mealplan.template.html", {
+            "form": create_form
+        })
 
 
 

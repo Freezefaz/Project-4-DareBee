@@ -114,7 +114,17 @@ def create_mealplan(request):
 def update_mealplan(request, mealplan_id):
     # return HttpResponse("Update Mealplan")
     mealplan_to_update = get_object_or_404(Mealplan, pk=mealplan_id)
-    mealplan_form = MealplanForm(instance=mealplan_to_update)
-    return render(request, "products/update_mealplan.template.html", {
-        "form": mealplan_form
-    })
+    if request.method == "POST":
+        mealplan_form = MealplanForm(request.POST, instance=mealplan_to_update)
+        if mealplan_form.is_valid():
+            mealplan_form.save()
+            return redirect(reverse(show_mealplans))
+        else:
+            return render(request, "products/update_mealplan.template.html", {
+                "form": mealplan_form
+            })
+    else:
+        mealplan_form = MealplanForm(instance=mealplan_to_update)
+        return render(request, "products/update_mealplan.template.html", {
+            "form": mealplan_form
+        })

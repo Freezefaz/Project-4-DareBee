@@ -75,3 +75,15 @@ class MealplansTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/create_mealplan.template.html")
+
+    # create dummy type
+    def setUp(self):
+        self.mealplan_type = MealplanType(type="Muscle Building")
+        self.mealplan_type.save()
+
+    def test_update_mealplan_page(self):
+        mealplan = Mealplan(title="Muscle", description="Tough",
+                            price="20", mealplan_type=self.mealplan_type)
+        mealplan.save()
+        response = self.client.get(f"/products/mealplans/update/{mealplan.id}")
+        self.assertEqual(response.status_code, 200)

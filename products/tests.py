@@ -97,3 +97,5 @@ class MealplansTestView(TestCase):
         response = self.client.get(
             f"/products/mealplans/delete/{mealplan.id}")
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/delete_mealplan.template.html")

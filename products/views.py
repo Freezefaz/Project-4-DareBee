@@ -1,5 +1,5 @@
 from .forms import ExerciseForm
-from .models import Exercise
+from .models import Exercise, Mealplan
 from django.shortcuts import render, HttpResponse,redirect, reverse, get_object_or_404
 
 # Create your views here.
@@ -73,4 +73,8 @@ def delete_exercise(request, exercise_id):
 # Start of Mealplans
 # show all mealplans
 def show_mealplans(request):
-    return HttpResponse("Mealplans")
+    # return HttpResponse("Mealplans")
+    all_mealplans = Mealplan.objects.all()
+    return render(request, "products/show_mealplans.template.html", {
+        "all_mealplans": all_mealplans
+    })

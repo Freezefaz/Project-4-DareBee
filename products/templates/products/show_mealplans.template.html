@@ -1,0 +1,17 @@
+{%extends 'base.template.html'%}
+
+{%block title%}Mealplans{%endblock%}
+
+{%block content%}
+
+<h1>All Mealplans</h1>
+
+<ul>
+    {%for each_mealplan in all_mealplans%}
+    <li>
+        {{each_mealplan.title}}s
+    </li>
+    {%endfor%}
+</ul>
+
+{%endblock%}

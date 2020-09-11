@@ -68,9 +68,10 @@ class MealplansTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         # check if it goes to the template
         self.assertTemplateUsed(
-            response, "products/show_mealplans.template.html"
-        )
+            response, "products/show_mealplans.template.html")
 
     def test_create_mealplans_page(self):
         response = self.client.get("/products/mealplans/create/")
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/create_mealplan.template.html")

@@ -6,7 +6,7 @@ urlpatterns = [
          name="show_profile_route"),
     path("create/", customers.views.create_profile,
          name="create_profile_route"),
-    path("update/<profile_id>/", customers.views.update_profile,
+    path("update/<profile_id>", customers.views.update_profile,
          name="update_profile_route"),
 
 ]

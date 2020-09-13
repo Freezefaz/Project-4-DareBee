@@ -31,7 +31,18 @@ class ProfileTestView(TestCase):
                           last_name="Dean", dob="2020-10-09", height="182",
                           weight="60", goals="best")
         profile.save()
-        response = self.client.get(f"/profiles/update/{profile.id}/")
+        response = self.client.get(f"/profiles/update/{profile.id}")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "customers/update_profile.template.html")
+
+    def test_delete_profile_page(self):
+        # to create a test exercise to retrieve id
+        profile = Profile(customer=self.customer, first_name="Herb",
+                          last_name="Dean", dob="2020-10-09", height="182",
+                          weight="60", goals="best")
+        profile.save()
+        response = self.client.get(f"/profiles/delete/{profile.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "customers/delete_profile.template.html")

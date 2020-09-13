@@ -51,3 +51,14 @@ def update_profile(request, profile_id):
         return render(request, "customers/update_profile.template.html", {
             "form": profile_form
         })
+
+def delete_profile(request, profile_id):
+    # return HttpResponse("Delete Exercise")
+    profile_to_delete = get_object_or_404(Profile, pk=profile_id)
+    if request.method == "POST":
+        profile_to_delete.delete()
+        return redirect(show_profiles)
+    else:
+        return render(request, "customers/delete_profile.template.html", {
+            "profile": profile_to_delete
+        })

@@ -1,0 +1,14 @@
+{%extends 'base.template.html'%}
+
+{%block title%}Delete Profile{%endblock%}
+
+{%block content%}
+
+<form method="POST">
+	{% csrf_token %}
+	Are you sure you want to delete {{profile.first_name}} {{profile.last_name}}?
+	<input type="submit" value="Yes, delete"/>
+    <a href="{% url 'show_profiles_route' %}">No</a>
+</form>
+
+{%endblock%}

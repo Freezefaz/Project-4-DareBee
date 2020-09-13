@@ -9,4 +9,4 @@ class ExerciseReviewForm(forms.ModelForm):
 class MealplanReviewForm(forms.ModelForm):
     class Meta:
         model = MealplanReview
-        exclude = ('exercise', 'customer')
+        exclude = ('mealplan', 'customer')

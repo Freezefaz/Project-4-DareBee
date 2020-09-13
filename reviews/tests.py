@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class ExerciseReviewTestView(TestCase):
     def test_exercise_review_page(self):
         # simulate going to products page
-        response = self.client.get("/reviews/exercise")
+        response = self.client.get("/reviews/exercise/")
         # check if it goes to the exact page
         self.assertEqual(response.status_code, 200)
         # check if it goes to the template

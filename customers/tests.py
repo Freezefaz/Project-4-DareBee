@@ -31,7 +31,7 @@ class ProfileTestView(TestCase):
                           last_name="Dean", dob="2020-10-09", height="182",
                           weight="60", goals="best")
         profile.save()
-        response = self.client.get(f"/profiles//update/{profile.id}")
+        response = self.client.get(f"/profiles/update/{profile.id}/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
-            response, "profiles/update_profile.template.html")
+            response, "customers/update_profile.template.html")

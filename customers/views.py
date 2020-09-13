@@ -6,6 +6,7 @@ from .forms import ProfileForm
 import products.views
 # Create your views here.
 
+
 def show_profiles(request):
     all_profiles = Profile.objects.all()
     return render(request, "customers/show_profiles.template.html", {
@@ -34,4 +35,19 @@ def create_profile(request):
             "form": create_form
         })
 
-   
+
+def update_profile(request, profile_id):
+    profile_to_update = get_object_or_404(Profile, pk=profile_id)
+    # if update form is submitted
+    if request.method == "POST":
+        # create form and fill in data to existing form
+        profile_form = ProfileForm(request.POST, instance=profile_to_update)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect(reverse(show_profiles))
+    else:
+        # create form and fill it with data
+        profile_form = ProfileForm(instance=profile_to_update)
+        return render(request, "customers/update_profile.template.html", {
+            "form": profile_form
+        })

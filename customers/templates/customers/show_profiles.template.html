@@ -1,0 +1,17 @@
+{% extends 'base.template.html'%}
+
+
+{%block title%} Profiles {%endblock%}
+
+{% block content %}
+
+    <h1>All Profiles</h1>
+        <ul>
+            {% for each_profile in all_profiles %}
+            <li>
+                {{each_profile.first_name}} {{each_profile.last_name}}
+            </li>
+        </ul>
+	{% endfor %}
+
+{% endblock %}

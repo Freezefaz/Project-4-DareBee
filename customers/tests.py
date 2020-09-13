@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class ProfileTestView(TestCase):
     def test_show_profile_page(self):
-        response = self.client.get("/profiles")
+        response = self.client.get("/profiles/")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "customers/show_profiles.template.html")

@@ -5,6 +5,11 @@ from .forms import ProfileForm
 import products.views
 # Create your views here.
 
+def show_profiles(request):
+    all_profiles = Profile.objects.all()
+    return render(request, "customers/show_profiles.template.html", {
+        "all_profiles": all_profiles
+    })
 
 
 def create_profile(request):

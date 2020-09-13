@@ -20,6 +20,8 @@ class Customer(models.Model):
 class Profile(models.Model):
     # columns in the table
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(blank=False, max_length=255)
+    last_name = models.CharField(blank=False, max_length=255)
     dob = models.DateField(blank=False)
     height = models.PositiveIntegerField(blank=False)
     weight = models.PositiveIntegerField(blank=False)
@@ -27,5 +29,5 @@ class Profile(models.Model):
 
     # make to string
     def __str__(self):
-        return self.customer
+        return self.first_name + " " + self.last_name
 

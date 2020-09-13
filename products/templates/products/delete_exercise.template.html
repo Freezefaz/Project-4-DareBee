@@ -8,7 +8,7 @@
 	{% csrf_token %}
 	Are you sure you want to delete {{exercise.title}}
 	<input type="submit" value="Yes, delete"/>
-    <a href="{% url 'view_all_exercise' %}">No</a>
+    <a href="{% url 'view_all_exercise_route' %}">No</a>
 </form>
 
 {%endblock%}

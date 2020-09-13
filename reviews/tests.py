@@ -14,3 +14,9 @@ class ExerciseReviewTestView(TestCase):
         # check if it goes to the template
         self.assertTemplateUsed(
             response, "reviews/show_exercise_reviews.template.html")
+
+    def test_create_exercise_review_page(self):
+        response = self.client.get("/reviews/exercise/create/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "customers/create_exercise_review.template.html")

@@ -1,5 +1,6 @@
 from .forms import ExerciseForm, MealplanForm
 from .models import Exercise, Mealplan
+from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 
 # Create your views here.
@@ -74,6 +75,14 @@ def delete_exercise(request, exercise_id):
         return render(request, "products/delete_exercise.template.html", {
             "exercise": exercise_to_delete
         })
+
+
+def view_exercise_details(request, exercise_id):
+    exercise_model = get_object_or_404(Exercise, pk=exercise_id)
+    return render(request, 'products/exercise_details.template.html', {
+        "exercise": exercise_model
+    })
+
 # End of Exercise
 
 

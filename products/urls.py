@@ -12,6 +12,9 @@ urlpatterns = [
          name="update_exercise_route"),
     path("exercise/delete/<exercise_id>", products.views.delete_exercise,
          name="delete_exercise_route"),
+    path('details/<exercise_id>', products.views.view_exercise_details,
+         name='exercise_details_route'),
+    # mealplan
     path("mealplans/", products.views.show_mealplans,
          name="view_all_mealplans_route"),
     path("mealplans/create/", products.views.create_mealplan,

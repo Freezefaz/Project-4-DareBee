@@ -149,3 +149,10 @@ def delete_mealplan(request, mealplan_id):
         return render(request, "products/delete_mealplan.template.html", {
             "mealplan": mealplan_to_delete
         })
+
+
+def view_mealplan_details(request, mealplan_id):
+    mealplan_model = get_object_or_404(Mealplan, pk=mealplan_id)
+    return render(request, 'products/mealplan_details.template.html', {
+        "mealplan": mealplan_model
+    })

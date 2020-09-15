@@ -12,7 +12,8 @@ urlpatterns = [
          name="update_exercise_route"),
     path("exercise/delete/<exercise_id>", products.views.delete_exercise,
          name="delete_exercise_route"),
-    path('exercise/details/<exercise_id>', products.views.view_exercise_details,
+    path("exercise/details/<exercise_id>",
+         products.views.view_exercise_details,
          name='exercise_details_route'),
     # mealplan
     path("mealplans/", products.views.show_mealplans,
@@ -22,6 +23,9 @@ urlpatterns = [
     path("mealplans/update/<mealplan_id>", products.views.update_mealplan,
          name="update_mealplan_route"),
     path("mealplans/delete/<mealplan_id>", products.views.delete_mealplan,
-         name="delete_mealplan_route")
+         name="delete_mealplan_route"),
+    path("mealplans/details/<mealplan_id>",
+         products.views.view_mealplan_details,
+         name="mealplan_details_route")
 
 ]

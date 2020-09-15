@@ -1,0 +1,15 @@
+{% extends 'base.template.html' %}
+{% load crispy_forms_tags %}
+
+{%block title%} Create review for {{mealplan.title}} {%endblock%}
+
+{% block content %}
+<h1>Create review for {{mealplan.title}}</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit"/>
+</form>
+
+{%endblock%}

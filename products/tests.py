@@ -108,3 +108,10 @@ class MealplansTestView(TestCase):
         self.assertTemplateUsed(
             response, "products/delete_mealplan.template.html")
 
+    def test_mealplan_details_page(self):
+        mealplan = Mealplan(title="Muscle", description="Tough",
+                            price="20", mealplan_type=self.mealplan_type)
+        response = self.client.get(f"/products/mealplans/details/{mealplan.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/show_exercise.template.html")

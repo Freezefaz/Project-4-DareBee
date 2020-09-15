@@ -8,8 +8,10 @@ urlpatterns = [
          name="create_exercise_review_route"),
     path("exercise/<exercise_id>/update/",
          reviews.views.update_exercise_review,
-         name="update_exercise_review_route")
+         name="update_exercise_review_route"),
     # path("exercise/<exercise_id>/update/<exercise_review_id>",
     #      reviews.views.update_exercise_review,
     #      name="update_exercise_review_route")
+    path("mealplan/create/<mealplan_id>", reviews.views.create_mealplan_review,
+         name="create_mealplan_review_route"),
 ]

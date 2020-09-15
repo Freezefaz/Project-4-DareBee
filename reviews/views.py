@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
-from .models import ExerciseReview
-from .forms import ExerciseReviewForm
-from products.models import Exercise
+from .models import ExerciseReview, MealplanReview
+from .forms import ExerciseReviewForm, MealplanReviewForm
+from products.models import Exercise, Mealplan
 # Create your views here.
 
 
@@ -57,4 +57,27 @@ def update_exercise_review(request, exercise_id):
                       'reviews/update_exercise_review.template.html', {
                           "form": form,
                           "exercise": exercise
+                      })
+
+
+# Mealplan
+
+def create_mealplan_review(request, mealplan_id):
+    mealplan = get_object_or_404(Mealplan, pk=mealplan_id)
+    if request.method == "POST":
+        form = ExerciseReviewForm(request.POST)
+        if form.is_valid():
+            review_model = form.save(commit=False)
+            review_model.mealplan = mealplan
+            review_model.customer = request.user
+            review_model.save()
+            print(review_model)
+            return redirect(reverse("mealplan_details_route",
+                                    kwargs={"mealplan_id": mealplan_id}))
+    else:
+        form = ExerciseReviewForm()
+        return render(request,
+                      "reviews/create_exercise_review.template.html", {
+                          "form": form,
+                          "mealplan": mealplan
                       })

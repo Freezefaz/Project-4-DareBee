@@ -1,0 +1,44 @@
+{% extends 'base.template.html' %} 
+
+{% block title %}
+    Details for {{mealplan.title}}
+{% endblock%} 
+
+{% block content %}
+
+<h1>{{mealplan.title}}</h1>
+<div class="row">
+  <div class="col-3">
+    Type:
+  </div>
+  <div class="col">
+    {{mealplan.exercise_type}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+    Price:
+  </div>
+  <div class="col">
+    {{mealplan.price}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">Description</div>
+  <div class="col">{{mealplan.description}}</div>
+</div>
+
+<h3>Reviews</h3>
+<a class="btn btn-primary" href="{% url 'create_mealplan_review_route' mealplan_id=mealplan.id %}">Add</a>
+{% for r in mealplan.mealplanreview_set.all %}
+<div class="card">
+  <div class="card-body">
+    <div class="card-title">{{r.title}}</div>
+    <p>on {{r.datetime}} by {{r.customer.first_name}} {{r.customer.last_name}}</p>
+    <div>
+      {{r.content}}
+    </div>
+  </div>
+</div>
+{% endfor %} 
+{% endblock%}

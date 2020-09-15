@@ -37,3 +37,16 @@ class ExerciseReviewTestView(TestCase):
     #     self.assertTemplateUsed(
     #         response, "customers/update_exercise_review.template.html")
 
+class MealplanReviewTestView(TestCase):
+     # To create a dummy mealplan type
+      def setUp(self):
+        self.exercise_type = ExerciseType(type="beginner")
+        self.exercise_type.save()
+
+      def test_create_mealplan_review_page(self):
+        exercise = Exercise(title="Foundation", description="Easy",
+                            price="20", exercise_type=self.exercise_type)
+        response = self.client.get(f"/reviews/exercise/create/{exercise.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "customers/create_exercise_review.template.html")

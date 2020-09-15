@@ -59,6 +59,14 @@ class ExerciseTestView(TestCase):
         self.assertTemplateUsed(
             response, "products/delete_exercise.template.html")
 
+    def test_exercise_details_page(self):
+        exercise = Exercise(title="Foundation", description="Easy",
+                            price="20", exercise_type=self.exercise_type)
+        response = self.client.get(f"/products/exercise/details/{exercise.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "products/exercise_details.template.html")
+
 
 class MealplansTestView(TestCase):
     def test_mealplans_page(self):
@@ -99,3 +107,4 @@ class MealplansTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/delete_mealplan.template.html")
+

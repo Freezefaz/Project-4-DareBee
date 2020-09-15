@@ -12,7 +12,7 @@ urlpatterns = [
          name="update_exercise_route"),
     path("exercise/delete/<exercise_id>", products.views.delete_exercise,
          name="delete_exercise_route"),
-    path('details/<exercise_id>', products.views.view_exercise_details,
+    path('exercise/details/<exercise_id>', products.views.view_exercise_details,
          name='exercise_details_route'),
     # mealplan
     path("mealplans/", products.views.show_mealplans,

@@ -65,19 +65,18 @@ def update_exercise_review(request, exercise_id):
 def create_mealplan_review(request, mealplan_id):
     mealplan = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
-        form = ExerciseReviewForm(request.POST)
+        form = MealplanReviewForm(request.POST)
         if form.is_valid():
             review_model = form.save(commit=False)
             review_model.mealplan = mealplan
             review_model.customer = request.user
             review_model.save()
-            print(review_model)
             return redirect(reverse("mealplan_details_route",
                                     kwargs={"mealplan_id": mealplan_id}))
     else:
-        form = ExerciseReviewForm()
+        form = MealplanReviewForm()
         return render(request,
-                      "reviews/create_exercise_review.template.html", {
+                      "reviews/create_mealplan_review.template.html", {
                           "form": form,
                           "mealplan": mealplan
                       })

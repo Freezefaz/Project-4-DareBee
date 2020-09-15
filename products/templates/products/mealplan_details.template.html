@@ -12,7 +12,7 @@
     Type:
   </div>
   <div class="col">
-    {{mealplan.exercise_type}}
+    {{mealplan.mealplan_type}}
   </div>
 </div>
 <div class="row">
@@ -34,7 +34,7 @@
 <div class="card">
   <div class="card-body">
     <div class="card-title">{{r.title}}</div>
-    <p>on {{r.datetime}} by {{r.customer.first_name}} {{r.customer.last_name}}</p>
+    <p>on {{r.datetime}} by {{r.customer.username}}</p>
     <div>
       {{r.content}}
     </div>

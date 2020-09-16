@@ -35,6 +35,7 @@
   <div class="card-body">
     <div class="card-title">{{r.title}}</div>
     <a class="btn btn-primary" href="{% url 'update_mealplan_review_route' mealplanreview_id=r.id %}">Update</a>
+    <a class="btn btn-primary" href="{% url 'delete_mealplan_review_route' mealplanreview_id=r.id %}">Delete</a>
     <p>on {{r.datetime}} by {{r.customer.username}}</p>
     <div>
       {{r.content}}

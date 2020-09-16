@@ -1,0 +1,14 @@
+{%extends 'base.template.html'%}
+
+{%block title%}Delete Exercise Review{%endblock%}
+
+{%block content%}
+
+<form method="POST">
+	{% csrf_token %}
+	Are you sure you want to delete {{exercisereview.title}}
+	<input type="submit" value="Yes, delete"/>
+    
+</form>
+
+{%endblock%}

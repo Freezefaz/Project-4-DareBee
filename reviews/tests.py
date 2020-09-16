@@ -87,7 +87,7 @@ class MealplanReviewTestView(TestCase):
                                         customer=self.customer)
         mealplanreview.save()
         response = self.client.get(
-            f"/reviews/exercise/update/{mealplanreview.id}")
+            f"/reviews/mealplan/update/{mealplanreview.id}")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "reviews/update_mealplan_review.template.html")

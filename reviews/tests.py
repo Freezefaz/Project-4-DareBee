@@ -91,3 +91,17 @@ class MealplanReviewTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "reviews/update_mealplan_review.template.html")
+
+    def test_delete_mealplan_review_page(self):
+        mealplan = Mealplan(title="Mass Effect", description="Big",
+                            price="20", mealplan_type=self.mealplan_type)
+        mealplan.save()
+        mealplanreview = MealplanReview(title="good", content="delish",
+                                        mealplan=mealplan,
+                                        customer=self.customer)
+        mealplanreview.save()
+        response = self.client.get(
+            f"/reviews/mealplan/delete/{mealplanreview.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "reviews/delete_mealplan_review.template.html")

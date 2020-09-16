@@ -66,6 +66,8 @@ class MealplanReviewTestView(TestCase):
     def setUp(self):
         self.mealplan_type = MealplanType(type="muscle buidler")
         self.mealplan_type.save()
+        self.customer = User(id=1)
+        self.customer.save()
 
     def test_create_mealplan_review_page(self):
         mealplan = Mealplan(title="Mass Effect", description="Big",
@@ -75,3 +77,17 @@ class MealplanReviewTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "reviews/create_mealplan_review.template.html")
+    
+    def test_update_mealplan_review_page(self):
+        mealplan = Mealplan(title="Mass Effect", description="Big",
+                            price="20", mealplan_type=self.mealplan_type)
+        mealplan.save()
+        mealplanreview = MealplanReview(title="good", content="delish",
+                                        mealplan=mealplan,
+                                        customer=self.customer)
+        mealplanreview.save()
+        response = self.client.get(
+            f"/reviews/exercise/update/{mealplanreview.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "reviews/update_mealplan_review.template.html")

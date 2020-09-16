@@ -58,6 +58,18 @@ def update_exercise_review(request, exercisereview_id):
                       })
 
 
+def delete_exercise_review(request, exercisereview_id):
+    exercise_review_to_delete = get_object_or_404(
+        ExerciseReview, pk=exercisereview_id)
+    if request.method == "POST":
+        exercise_review_to_delete.delete()
+        return redirect(reverse("exercise_details",
+                                kwags={"exercise_id":
+                                       exercise_review_to_delete.exercise.id}))
+    else:
+        return render(request, "reviews/delete_exercise_review.template.html")
+
+
 # Mealplan
 
 def create_mealplan_review(request, mealplan_id):

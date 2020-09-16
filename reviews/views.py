@@ -114,3 +114,16 @@ def update_mealplan_review(request, mealplanreview_id):
                           "form": form,
                           "mealplan": mealplan_review_to_update
                       })
+
+def delete_mealplan_review(request, mealplanreview_id):
+    mealplan_review_to_delete = get_object_or_404(
+        MealplanReview, pk=mealplanreview_id)
+    if request.method == "POST":
+        mealplan_review_to_delete.delete()
+        return redirect(reverse("mealplan_details_route",
+                                kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id}))
+    else:
+        return render(request, "reviews/delete_mealplan_review.template.html",
+                      {
+                          "mealplanreview": mealplan_review_to_delete
+                      })

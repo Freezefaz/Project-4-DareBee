@@ -19,5 +19,8 @@ urlpatterns = [
          name="create_mealplan_review_route"),
     path("mealplan/update/<mealplanreview_id>",
          reviews.views.update_mealplan_review,
-         name="update_mealplan_review_route")
+         name="update_mealplan_review_route"),
+    path("mealplan/delete/<mealplanreview_id>",
+         reviews.views.delete_mealplan_review,
+         name="delete_mealplan_review_route")
 ]

@@ -47,7 +47,9 @@ def update_exercise_review(request, exercisereview_id):
             form.save()
             # return redirect(reverse("exercise_details_route"))
             # need to use the relationship id to get the exercise_id
-            return redirect(reverse("exercise_details_route", kwargs={"exercise_id": exercise_review_to_update.exercise.id}))
+            return redirect(reverse("exercise_details_route",
+                                    kwargs={"exercise_id":
+                                            exercise_review_to_update.exercise.id}))
             # return redirect(reverse("exercise_details_route", kwargs={"exercise_review_id": exercise_review_id}))
     else:
         form = ExerciseReviewForm(instance=exercise_review_to_update)
@@ -63,14 +65,17 @@ def delete_exercise_review(request, exercisereview_id):
         ExerciseReview, pk=exercisereview_id)
     if request.method == "POST":
         exercise_review_to_delete.delete()
-        return redirect(reverse("exercise_details",
-                                kwags={"exercise_id":
-                                       exercise_review_to_delete.exercise.id}))
+        # return redirect(reverse("exercise_details_route"))
+        return redirect(reverse("exercise_details_route",
+                                kwargs={"exercise_id": exercise_review_to_delete.exercise.id}))
     else:
-        return render(request, "reviews/delete_exercise_review.template.html")
-
+        return render(request, "reviews/delete_exercise_review.template.html",
+                      {
+                          "exercisereview": exercise_review_to_delete
+                      })
 
 # Mealplan
+
 
 def create_mealplan_review(request, mealplan_id):
     mealplan = get_object_or_404(Mealplan, pk=mealplan_id)

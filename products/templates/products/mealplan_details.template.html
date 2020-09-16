@@ -29,7 +29,7 @@
 </div>
 
 <h3>Reviews</h3>
-<a class="btn btn-primary" href="{% url 'create_mealplan_review_route' mealplan_id=mealplan.id %}">Add</a>
+<a class="btn btn-primary" href="{% url 'create_mealplan_review_route' mealplan_id=mealplan.id %}">Create</a>
 {% for r in mealplan.mealplanreview_set.all %}
 <div class="card">
   <div class="card-body">

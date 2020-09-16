@@ -29,7 +29,7 @@
 </div>
 
 <h3>Reviews</h3>
-<a class="btn btn-primary" href="{% url 'create_exercise_review_route' exercise_id=exercise.id %}">Add</a>
+<a class="btn btn-primary" href="{% url 'create_exercise_review_route' exercise_id=exercise.id %}">Create</a>
 {% for r in exercise.exercisereview_set.all %}
 <div class="card">
   <div class="card-body">

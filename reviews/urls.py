@@ -16,5 +16,8 @@ urlpatterns = [
          reviews.views.delete_exercise_review,
          name="delete_exercise_review_route"),
     path("mealplan/create/<mealplan_id>", reviews.views.create_mealplan_review,
-         name="create_mealplan_review_route")
+         name="create_mealplan_review_route"),
+    path("mealplan/update/<mealplanreview_id>",
+         reviews.views.update_mealplan_review,
+         name="update_mealplan_review_route")
 ]

@@ -95,3 +95,22 @@ def create_mealplan_review(request, mealplan_id):
                           "form": form,
                           "mealplan": mealplan
                       })
+
+def update_mealplan_review(request, mealplanreview_id):
+    mealplan_review_to_update = get_object_or_404(
+        MealplanReview, pk=mealplanreview_id)
+    if request.method == "POST":
+        form = MealplanReviewForm(request.POST,
+                                  instance=mealplan_review_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("exercise_details_route",
+                                    kwargs={"exercise_id":
+                                            mealplan_review_to_update.exercise.id}))
+    else:
+        form = MealplanReviewForm(instance=mealplan_review_to_update)
+        return render(request,
+                      'reviews/update_mealplan_review.template.html', {
+                          "form": form,
+                          "exercise": mealplan_review_to_update
+                      })

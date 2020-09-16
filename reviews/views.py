@@ -104,13 +104,13 @@ def update_mealplan_review(request, mealplanreview_id):
                                   instance=mealplan_review_to_update)
         if form.is_valid():
             form.save()
-            return redirect(reverse("exercise_details_route",
-                                    kwargs={"exercise_id":
-                                            mealplan_review_to_update.exercise.id}))
+            return redirect(reverse("mealplan_details_route",
+                                    kwargs={"mealplan_id":
+                                            mealplan_review_to_update.mealplan.id}))
     else:
         form = MealplanReviewForm(instance=mealplan_review_to_update)
         return render(request,
                       'reviews/update_mealplan_review.template.html', {
                           "form": form,
-                          "exercise": mealplan_review_to_update
+                          "mealplan": mealplan_review_to_update
                       })

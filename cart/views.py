@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_0r_404, redirect, reverse
+from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 
 # Create your views here.
 def view_cart(request):

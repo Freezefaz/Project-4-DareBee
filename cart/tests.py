@@ -14,3 +14,13 @@ class TestCartView(TestCase):
         self.assertTemplateUsed(
             response, "cart/view_cart.template.html"
         )
+
+    def test_add_to_cart_page(self):
+        exercise = Exercise(title="Foundation", description="Easy",
+                            price="20", exercise_type=self.exercise_type)
+        exercise.save()
+        response = self.client.get(f"/cart/add/{self.exercise.id}")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, "cart/add_to_cart.template.html"
+        )

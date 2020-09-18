@@ -5,13 +5,18 @@
 {%block content%}
 
 <h1>Your Cart </h1>
-    <ul>
-        {% for key, item in cart.items %}
-        <li>
-            Title: {{item.title}}<br>
-            Price: SGD {{item.price}}
-        </li>
-        {%endfor%}
-    </ul>
 
+ {% for key, item in cart.items %}
+    <div class="card">
+        <div class="card-header"> Title: {{item.title}}</div>
+       <div class="card-body">
+        <p>
+            Price: SGD {{item.price}}<br>
+            Quantity: {{item.qty}}
+        </p>
+        <a class="btn btn-danger btn-sm" href="{% url 'remove_from_cart_route' exercise_id=item.id%}">Remove</a>
+       </div>
+    </div>
+
+{%endfor%}
 {%endblock%}

@@ -35,4 +35,15 @@ def view_cart(request):
         "cart": cart
     })
 
+def remove_from_cart(request, exercise_id):
+    cart = request.session.get("shopping_cart", {})
+
+    # if exercise is in cart
+    if exercise_id in cart:
+        # remove from cart
+        del cart[exercise_id]
+        # save back to the session
+        request.session["shopping_cart"] = cart
+        messages.success(request, "Exerccise removed from cart successfully!")
+        return redirect(reverse("view_all_exercise_route"))
 

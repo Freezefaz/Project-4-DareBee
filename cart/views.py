@@ -19,32 +19,20 @@ def add_to_cart(request, exercise_id):
         }
         # save the cart back to sessions
         request.session["shopping_cart"] = cart
-        print("hi")
-        print(cart)
         messages.success(request, f"{exercise.title} added to your cart!")
         # return redirect(reverse("view_all_exercise_route", kwargs={"exercise_id": exercise_id}))
         return redirect(reverse("view_all_exercise_route"))
     else:
         cart[exercise_id]["qty"] += 1
         request.session["shopping_cart"] = cart
-        print("hi2")
-        print(cart)
         # return redirect(reverse("view_all_exercise_route", kwargs={"exercise_id": exercise_id}))
         return redirect(reverse("view_all_exercise_route"))
 
 def view_cart(request):
     # retrieve the cart
     cart = request.session.get("shopping_cart", {})
-    print("hi3")
-    print(cart)
     return render(request, "cart/view_cart.template.html", {
         "cart": cart
     })
 
-# def view_cart(request):
-#     # retrieve the cart
-#     cart = request.session.get('shopping_cart', {})
-#     return render(request, 'cart/view_cart.template.html', {
-#     'shopping_cart':cart
-#     })
 

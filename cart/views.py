@@ -14,7 +14,8 @@ def add_to_cart(request, exercise_id):
         cart[exercise_id] = {
             "id": exercise_id,
             "title": exercise.title,
-            "price": "${:.2f}".format(int(exercise.price/100)),
+            # "price": "${:.2f}".format(int(exercise.price/100)),
+            "price": f"{exercise.price:.2f}",
             "qty": 1
         }
         # save the cart back to sessions
@@ -31,8 +32,13 @@ def add_to_cart(request, exercise_id):
 def view_cart(request):
     # retrieve the cart
     cart = request.session.get("shopping_cart", {})
+    total = 0
+    for key, item in cart.items():
+        total += (float(item["price"]) * float(item["qty"]))
+    print(total)
     return render(request, "cart/view_cart.template.html", {
-        "cart": cart
+        "cart": cart,
+        "total": f"{total:.2f}"
     })
 
 def remove_from_cart(request, exercise_id):

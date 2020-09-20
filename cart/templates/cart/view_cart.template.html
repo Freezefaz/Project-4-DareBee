@@ -16,10 +16,11 @@
             Quantity: <input name="qty" type="text" value="{{item.qty}}" style="width:20px">
             <input type="submit" class="btn btn-primary btn-sm" value="Update Quantity"/>
             </form>
-            Price: SGD {{item.price}}
+            Price: ${{item.price}}
         </p>
         <a class="btn btn-danger btn-sm" href="{% url 'remove_from_cart_route' exercise_id=item.id%}">Remove</a>
        </div>
+       <h1>Total: ${{total}}</h1>
     </div>
 
 {%endfor%}

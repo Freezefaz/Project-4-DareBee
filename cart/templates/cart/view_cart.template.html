@@ -11,8 +11,12 @@
         <div class="card-header"> Title: {{item.title}}</div>
        <div class="card-body">
         <p>
-            Price: SGD {{item.price}}<br>
-            Quantity: {{item.qty}}
+            <form method="POST" action="{% url 'update_cart_quantity_route' exercise_id=item.id%}">
+            {%csrf_token%}
+            Quantity: <input name="qty" type="text" value="{{item.qty}}" style="width:20px">
+            <input type="submit" class="btn btn-primary btn-sm" value="Update Quantity"/>
+            </form>
+            Price: SGD {{item.price}}
         </p>
         <a class="btn btn-danger btn-sm" href="{% url 'remove_from_cart_route' exercise_id=item.id%}">Remove</a>
        </div>

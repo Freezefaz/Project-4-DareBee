@@ -44,4 +44,4 @@ class TestCartView(TestCase):
         exercise.save()
         response = self.client.get(f"/cart/remove/{exercise.id}")
         self.assertEqual(response.status_code, 200)
-   
+

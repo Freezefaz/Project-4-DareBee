@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.conf import settings
 import stripe
+from products.models import Exercise
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 
@@ -17,15 +18,15 @@ def checkout(request):
     all_exercise_ids = []
 
     # go through each line in cart
-    for exercise_id, exercise in cart.items():
+    for key, item in cart.items():
         # retrieve exercise by id
-        exercise_model = get_object_or_404(Exercise, pk=exercise_id)
+        exercise_model = get_object_or_404(Exercise, pk=item["id"])
 
         # create line item for stripe
         item = {
             "name": exercise_model.title,
-            "amount": int(exercise_model.price * qty),
-            "quantity": exercise["qty"],
+            "amount": int(exercise_model.price * item["qty"]),
+            "quantity": item["qty"],
             "currency": "usd",
         }
 
@@ -52,4 +53,10 @@ def checkout(request):
         'session_id': session_id,
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
-        
+
+def checkout_success(request):
+    return HttpResponse("Payment is successful")
+
+def checkout_cancelled(request):
+    return HttpResponse("Payment is cancelled")
+

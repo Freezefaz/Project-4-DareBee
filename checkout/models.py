@@ -1,3 +1,13 @@
 from django.db import models
+from products.models import Exercise
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Purchase(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    purchase_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Purchase made for id:{self.exercise.id} by {self.customer.username} on {self.purchase_date}"

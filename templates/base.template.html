@@ -11,6 +11,9 @@
   </head>
   <body>
     <div class="container">
+        <div class="header">
+            <a href="{% url 'view_cart_route' %}"> Shopping Cart ({{number_of_items}})</a>
+        </div>
                 {%block content%}{%endblock%}
 
     <!-- Optional JavaScript -->

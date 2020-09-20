@@ -60,3 +60,30 @@ def checkout_success(request):
 def checkout_cancelled(request):
     return HttpResponse("Payment is cancelled")
 
+@csrf_exempt
+def payment_completed(request):
+    # data send to us by stripe
+    payload = request.body
+    # stripe gives a serial number and need to verify if this stripe
+    sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
+    # to define event in try
+    event = None
+    # remember to get the endpoint secret
+    # get the secret signature and paste on the settings.py
+    # also on .env
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # invalid payload
+        print(e)
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        print(e)
+        return HttpResponse(status=400)
+
+    if event["type"] == 'checkout.session.completed':
+        session = event['data']['object']
+        handle_payment(session)
+    return HttpResponse(status=200)

@@ -2,10 +2,11 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from django.conf import settings
 import stripe
 from products.models import Exercise
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
-
-from products.models import Exercise
+import os
+endpoint_secret = os.environ.get('STRIPE_ENDPOINT_SECRET')
 
 # Create your views here.
 def checkout(request):
@@ -87,3 +88,22 @@ def payment_completed(request):
         session = event['data']['object']
         handle_payment(session)
     return HttpResponse(status=200)
+
+
+def handle_payment(session):
+    # print(session)
+    user = get_object_or_404(User, pk=session["client_reference_id"])
+
+    # change the metadata from string back to array
+    all_exercise_ids = session["metadata"]["all_exercise_ids"].split(",")
+
+    # go through each book id
+    for exercise_id in all_exercise_ids:
+        exercise_model = get_object_or_404(Exercise, pk=exercise_id)
+
+        # create the purchase model
+        purchase = Purchase()
+        purchase.exercise_id = exercise_model
+        purchase.user_id = user
+        purchase.save()
+

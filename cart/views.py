@@ -47,3 +47,17 @@ def remove_from_cart(request, exercise_id):
         messages.success(request, "Exerccise removed from cart successfully!")
         return redirect(reverse("view_all_exercise_route"))
 
+def update_cart_quantity(request, exercise_id):
+    cart = request.session.get("shopping_cart", {})
+    quantity = request.POST["qty"]
+    if exercise_id in cart:
+        # cart[exercise_id]["qty"] = request.POST["qty"]
+        cart[exercise_id]["qty"] = quantity
+        print(quantity)
+        messages.success(request, "Quantity has been updated")
+
+        # update the session
+        request.session["shopping_cart"] = cart
+    else:
+        messages.success(request, "Failed to update")
+    return redirect(reverse('view_cart_route'))

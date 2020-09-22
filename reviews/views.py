@@ -129,7 +129,8 @@ def delete_mealplan_review(request, mealplanreview_id):
     if request.method == "POST":
         mealplan_review_to_delete.delete()
         return redirect(reverse("mealplan_details_route",
-                                kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id}))
+                                kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id,
+                                 "mealplanreview_id":mealplanreview_id}))
     else:
         return render(request, "reviews/delete_mealplan_review.template.html",
                       {

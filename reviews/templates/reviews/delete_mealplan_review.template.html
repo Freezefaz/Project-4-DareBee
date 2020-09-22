@@ -7,6 +7,7 @@
 <form method="POST">
 	{% csrf_token %}
 	Are you sure you want to delete {{mealplanreview.title}}
+    <a href="{% url 'mealplan_details_route' mealplan_id=mealplanreview.mealplan.id %}" class="btn btn-primary">No</a>
 	<input type="submit" value="Yes, delete"/>
     
 </form>

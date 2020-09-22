@@ -60,18 +60,24 @@ def update_exercise_review(request, exercisereview_id):
                       })
 
 
+# def delete_exercise_review(request, exercise_id, exercisereview_id):
 def delete_exercise_review(request, exercisereview_id):
+    # exercise = get_object_or_404(Exercise, pk=exercise_id)
     exercise_review_to_delete = get_object_or_404(
-        ExerciseReview, pk=exercisereview_id)
+    ExerciseReview, pk=exercisereview_id)
     if request.method == "POST":
         exercise_review_to_delete.delete()
         # return redirect(reverse("exercise_details_route"))
         return redirect(reverse("exercise_details_route",
-                                kwargs={"exercise_id": exercise_review_to_delete.exercise.id}))
+                                kwargs={
+                                    # "exercise_id": exercise_id,
+                                    "exercise_id": exercisereview_id.exercise.id,
+                                    "exercisereview_id": exercisereview_id}))
     else:
         return render(request, "reviews/delete_exercise_review.template.html",
                       {
-                          "exercisereview": exercise_review_to_delete
+                          "exercisereview": exercise_review_to_delete,
+                        #   "exercise": exercise
                       })
 
 # Mealplan
@@ -96,6 +102,7 @@ def create_mealplan_review(request, mealplan_id):
                           "mealplan": mealplan
                       })
 
+
 def update_mealplan_review(request, mealplanreview_id):
     mealplan_review_to_update = get_object_or_404(
         MealplanReview, pk=mealplanreview_id)
@@ -114,6 +121,7 @@ def update_mealplan_review(request, mealplanreview_id):
                           "form": form,
                           "mealplan": mealplan_review_to_update
                       })
+
 
 def delete_mealplan_review(request, mealplanreview_id):
     mealplan_review_to_delete = get_object_or_404(

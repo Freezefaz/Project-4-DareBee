@@ -6,6 +6,7 @@ class ExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
         exclude = ("type",)
+    cover = CloudinaryJsFileField()
 
 
 class MealplanForm(forms.ModelForm):

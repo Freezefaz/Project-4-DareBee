@@ -1,4 +1,5 @@
 {% extends 'base.template.html' %} 
+{% load cloudinary %}
 
 {% block title %}
     Details for {{exercise.title}}
@@ -7,6 +8,8 @@
 {% block content %}
 
 <h1>{{exercise.title}}</h1>
+{% cloudinary book.cover %}
+
 <div class="row">
   <div class="col-3">
     Type:

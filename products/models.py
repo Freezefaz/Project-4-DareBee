@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -18,6 +19,7 @@ class Exercise(models.Model):
     description = models.CharField(blank=False, max_length=255)
     price = models.PositiveIntegerField(blank=False)
     exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
+    cover = CloudinaryField()
 
     # to make string
     def __str__(self):

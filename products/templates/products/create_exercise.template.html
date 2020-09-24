@@ -6,24 +6,23 @@
 {%block title%} Create Exercise {%endblock%}
 
 {%block content %}
-    <h1>Create Book</h1>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{form|crispy}}
-      <input type="submit"/>
+<h1>Create Book</h1>
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{form|crispy}}
+	<input type="submit"/>
     </form>
 
-<!-- for debugging -->
-<div class="status">
-    <h2>Status</h2>
-    <span class="status_value">Idle</span>
-</div>
+	<!-- for debugging -->
+	<div class="status">
+		<h2>Status</h2>
+		<span class="status_value">Idle</span>
+	</div>
 
-<div class="uploaded_info_holder">
-</div>
-<!-- end debugging -->
-
-{%endblock%}
+	<div class="uploaded_info_holder">
+	</div>
+	<!-- end debugging -->
+	{%endblock%}
 
 {% block js %}
 {% cloudinary_includes %}
@@ -70,6 +69,7 @@ $(function(){
 
     })
 })
+
 
 </script>
 

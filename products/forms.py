@@ -1,5 +1,6 @@
 from django import forms
 from .models import Exercise, Mealplan
+from cloudinary.forms import CloudinaryJsFileField
 
 
 class ExerciseForm(forms.ModelForm):

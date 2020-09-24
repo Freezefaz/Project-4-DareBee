@@ -12,7 +12,7 @@
                 <a href="{% url 'exercise_details_route' exercise_id=each_exercise.id %}">{{each_exercise.title}}</a> 
                 <a href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Edit</a>
                 <a href="{% url 'delete_exercise_route' exercise_id=each_exercise.id%}">Delete</a>
-                <a href="{% url 'add_to_cart_route' exercise_id=each_exercise.id%}">Add to Cart</a>
+                <a href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}">Add to Cart</a>
             </li>
         </ul>
 	{% endfor %}

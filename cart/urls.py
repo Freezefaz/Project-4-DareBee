@@ -3,10 +3,11 @@ import cart.views
 
 urlpatterns = [
     path("", cart.views.view_cart, name="view_cart_route"),
-    path("add/<exercise_id>", cart.views.add_to_cart,
-         name="add_to_cart_route"),
-    path("remove/<exercise_id>", cart.views.remove_from_cart,
-         name="remove_from_cart_route"),
-    path('update/quantity/exercise/<exercise_id>', cart.views.update_cart_quantity,
-         name="update_cart_quantity_route")
+    path("add/<exercise_id>", cart.views.add_to_exercise_cart,
+         name="add_to_exercise_cart_route"),
+    path("remove/<exercise_id>", cart.views.remove_from_exercise_cart,
+         name="remove_from_exercise_cart_route"),
+    path('update/quantity/exercise/<exercise_id>',
+         cart.views.update_exercise_cart_quantity,
+         name="update_exercise_cart_quantity_route")
 ]

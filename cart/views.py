@@ -4,7 +4,7 @@ from products.models import Exercise
 
 # Create your views here.
 
-def add_to_cart(request, exercise_id):
+def add_to_exercise_cart(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     # exercise = get_object_or_404(Exercise, pk=exercise_id)
     # check if book is not in the cart, then add
@@ -41,7 +41,7 @@ def view_cart(request):
         "total": f"{total:.2f}"
     })
 
-def remove_from_cart(request, exercise_id):
+def remove_from_exercise_cart(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
 
     # if exercise is in cart
@@ -53,7 +53,9 @@ def remove_from_cart(request, exercise_id):
         messages.success(request, "Exercise removed from cart successfully!")
         return redirect(reverse("view_all_exercise_route"))
 
-def update_cart_quantity(request, exercise_id):
+
+
+def update_exercise_cart_quantity(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     quantity = request.POST["qty"]
     if exercise_id in cart:

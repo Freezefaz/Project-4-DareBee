@@ -3,7 +3,7 @@ from django.conf import settings
 import stripe
 from products.models import Exercise, Mealplan
 from django.contrib.auth.models import User
-# from .models import Purchase
+from .models import Exercise_Purchase, Mealplan_Purchase
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -30,40 +30,40 @@ def checkout(request):
     all_mealplan_ids = []
 
     # go through each line in cart
-    for key, item in exercise_cart.items():
+    for key, exercise_item in exercise_cart.items():
         # retrieve exercise by id
-        exercise_model = get_object_or_404(Exercise, pk=item["id"])
+        exercise_model = get_object_or_404(Exercise, pk=exercise_item["id"])
 
         # create line item for stripe
-        item = {
+        exercise_item = {
             "name": exercise_model.title,
             "amount": int(exercise_model.price * 100),
-            "quantity": item["qty"],
+            "quantity": exercise_item["qty"],
             "currency": "sgd",
         }
 
-        exercise_line_items.append(item)
+        exercise_line_items.append(exercise_item)
         all_exercise_ids.append({
             "exercise_id": exercise_model.id,
             # "qty": item["qty"]
         })
 
     # go through each line in cart
-    for key, item in mealplan_cart.items():
+    for key, mealplan_item in mealplan_cart.items():
         # retrieve exercise by id
-        mealplan_model = get_object_or_404(Mealplan, pk=item["id"])
+        mealplan_model = get_object_or_404(Mealplan, pk=mealplan_item["id"])
 
         # create line item for stripe
-        item = {
+        mealplan_item = {
             "name": mealplan_model.title,
             "amount": int(mealplan_model.price * 100),
             "quantity": 1,
             "currency": "sgd",
         }
 
-        mealplan_line_items.append(item)
+        mealplan_line_items.append(mealplan_item)
         all_mealplan_ids.append({
-            "exercise_id": nealplan_model.id,
+            "mealplan_id": mealplan_model.id,
             # "qty": item["qty"]
         })
 
@@ -73,11 +73,12 @@ def checkout(request):
     # get the domain name
     domain = current_site.domain
 
+    all_line_items = exercise_line_items + mealplan_line_items
     # create a payment session for current transaction
     session = stripe.checkout.Session.create(
         # take credit cards
         payment_method_types=["card"],
-        line_items=line_items,
+        line_items=all_line_items,
         # customer id
         client_reference_id=request.user.id,
         mode='payment',
@@ -88,11 +89,13 @@ def checkout(request):
             "all_mealplan_ids": json.dumps(all_mealplan_ids)
         }
     )
+    print(session)
     # render the template which will redirect to stripe
     return render(request, "checkout/checkout.template.html", {
         'session_id': session.id,
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
+    
 
 def checkout_success(request):
     # empty the shopping cart
@@ -112,6 +115,7 @@ def payment_completed(request):
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     # to define event in try
     event = None
+    print("hi2")
     # remember to get the endpoint secret
     # get the secret signature and paste on the settings.py
     # also on .env
@@ -131,6 +135,7 @@ def payment_completed(request):
         session = event["data"]["object"]
         handle_payment(session)
     return HttpResponse(status=200)
+    
 
 
 def handle_payment(session):
@@ -142,20 +147,25 @@ def handle_payment(session):
     
     # all_exercise_ids = session["metadata"]["all_exercise_ids"].split(",")
     all_exercise_ids = json.loads(session["metadata"]["all_exercise_ids"])
-    print("hi")
-    print(all_exercise_ids)
     for exercise in all_exercise_ids:
         exercise_model = get_object_or_404(Exercise, pk=exercise["exercise_id"])
         print(exercise_model)
 
-    # go through each book id
-    # for exercise_id in all_exercise_ids:
-    #     exercise_model = get_object_or_404(Exercise, pk=exercise_id)
-
         # create the purchase model
-        # exercise_purchase = Purchase()
-        # purchase.exercise = exercise_model
-        # purchase.customer = customer
-        # purchase.save()
-        # print(purchase)
+        exercise_purchase = Exercise_Purchase()
+        exercise_purchase.exercise = exercise_model
+        exercise_purchase.customer = customer
+        exercise_purchase.price = exercise_model.price
+        exercise_purchase.save()
+
+    all_mealplan_ids = json.loads(session["metadata"]["all_mealplan_ids"])
+    for mealplan in all_mealplan_ids:
+        mealplan_model = get_object_or_404(Mealplan, pk=mealplan["mealplan_id"])
+        print("hi3")
+        # create the purchase model
+        mealplan_purchase = Mealplan_Purchase()
+        mealplan_purchase.mealplan = mealplan_model
+        mealplan_purchase.customer = customer
+        mealplan_purchase.price = mealplan_model.price
+        mealplan_purchase.save()
 

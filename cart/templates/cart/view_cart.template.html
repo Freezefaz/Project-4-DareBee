@@ -32,6 +32,7 @@
         <p>
             Price: ${{item.price}}
         </p>
+        <a class="btn btn-danger btn-sm" href="{% url 'remove_from_mealplan_cart_route' mealplan_id=item.id%}">Remove</a>
        </div>
     </div>
 

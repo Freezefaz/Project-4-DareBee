@@ -12,4 +12,6 @@ urlpatterns = [
          name="update_exercise_cart_quantity_route"),
     path(r"^add/(?P<mealplan_id>[^/]+$", cart.views.add_to_mealplan_cart,
          name="add_to_mealplan_cart_route"),
+    path(r"^remove/(?P<mealplan_id>[^/]+$", cart.views.remove_from_mealplan_cart,
+         name="remove_from_mealplan_cart_route"),
 ]

@@ -78,6 +78,17 @@ def remove_from_exercise_cart(request, exercise_id):
         messages.success(request, "Exercise removed from cart successfully!")
         return redirect(reverse("view_all_exercise_route"))
 
+def remove_from_mealplan_cart(request, mealplan_id):
+    cart = request.session.get("mealplan_shopping_cart", {})
+
+    # if exercise is in cart
+    if mealplan_id in cart:
+        # remove from cart
+        del cart[mealplan_id]
+        # save back to the session
+        request.session["mealplan_shopping_cart"] = cart
+        messages.success(request, "Mealplan removed from cart successfully!")
+        return redirect(reverse("view_all_mealplans_route"))
 
 def update_exercise_cart_quantity(request, exercise_id):
     cart = request.session.get("shopping_cart", {})

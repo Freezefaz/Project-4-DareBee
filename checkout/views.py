@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.conf import settings
 import stripe
-from products.models import Exercise
+from products.models import Exercise, Mealplan
 from django.contrib.auth.models import User
-from .models import Purchase
+# from .models import Purchase
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -20,13 +20,17 @@ def checkout(request):
     # tell stripe what api key is
     stripe.api_key = settings.STRIPE_SECRET_KEY
     # retrieve my shopping cart
-    cart = request.session.get("shopping_cart", {})
+    exercise_cart = request.session.get("shopping_cart", {})
+    mealplan_cart = request.session.get("mealplan_shopping_cart", {})
 
-    line_items = []
+    exercise_line_items = []
     all_exercise_ids = []
 
+    mealplan_line_items = []
+    all_mealplan_ids = []
+
     # go through each line in cart
-    for key, item in cart.items():
+    for key, item in exercise_cart.items():
         # retrieve exercise by id
         exercise_model = get_object_or_404(Exercise, pk=item["id"])
 
@@ -38,11 +42,31 @@ def checkout(request):
             "currency": "sgd",
         }
 
-        line_items.append(item)
+        exercise_line_items.append(item)
         all_exercise_ids.append({
             "exercise_id": exercise_model.id,
             # "qty": item["qty"]
         })
+
+    # go through each line in cart
+    for key, item in mealplan_cart.items():
+        # retrieve exercise by id
+        mealplan_model = get_object_or_404(Mealplan, pk=item["id"])
+
+        # create line item for stripe
+        item = {
+            "name": mealplan_model.title,
+            "amount": int(mealplan_model.price * 100),
+            "quantity": 1,
+            "currency": "sgd",
+        }
+
+        mealplan_line_items.append(item)
+        all_mealplan_ids.append({
+            "exercise_id": nealplan_model.id,
+            # "qty": item["qty"]
+        })
+
 
     # get current website
     current_site = Site.objects.get_current()
@@ -60,10 +84,10 @@ def checkout(request):
         success_url=domain + reverse("checkout_success_route"),
         cancel_url=domain + reverse("checkout_cancelled_route"),
         metadata={
-            "all_exercise_ids": json.dumps(all_exercise_ids, cls=UUIDEncoder)
+            "all_exercise_ids": json.dumps(all_exercise_ids, cls=UUIDEncoder),
+            "all_mealplan_ids": json.dumps(all_mealplan_ids)
         }
     )
-    print(session)
     # render the template which will redirect to stripe
     return render(request, "checkout/checkout.template.html", {
         'session_id': session.id,
@@ -73,6 +97,7 @@ def checkout(request):
 def checkout_success(request):
     # empty the shopping cart
     # request.session['shopping_cart'] = {}
+     # request.session['mealplan_shopping_cart'] = {}
     return HttpResponse("Payment is successful")
 
 def checkout_cancelled(request):
@@ -128,9 +153,9 @@ def handle_payment(session):
     #     exercise_model = get_object_or_404(Exercise, pk=exercise_id)
 
         # create the purchase model
-        purchase = Purchase()
-        purchase.exercise = exercise_model
-        purchase.customer = customer
-        purchase.save()
-        print(purchase)
+        # exercise_purchase = Purchase()
+        # purchase.exercise = exercise_model
+        # purchase.customer = customer
+        # purchase.save()
+        # print(purchase)
 

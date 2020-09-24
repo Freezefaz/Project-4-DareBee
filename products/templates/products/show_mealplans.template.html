@@ -12,6 +12,8 @@
         <a href="{% url 'mealplan_details_route' mealplan_id=each_mealplan.id %}">{{each_mealplan.title}}</a> 
         <a href="{% url 'update_mealplan_route' mealplan_id=each_mealplan.id%}">Edit</a>
         <a href="{% url 'delete_mealplan_route' mealplan_id=each_mealplan.id%}">Delete</a>
+        <a href="{% url 'add_to_mealplan_cart_route' mealplan_id=each_mealplan.id%}">Add to Cart</a>
+
     </li>
     {%endfor%}
 </ul>

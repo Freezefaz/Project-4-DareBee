@@ -7,6 +7,7 @@
 <h1>Your Cart </h1>
 
  {% for key, item in cart.items %}
+    <h2>Exercise</h2>
     <div class="card">
         <div class="card-header"> Title: {{item.title}}</div>
        <div class="card-body">
@@ -20,9 +21,22 @@
         </p>
         <a class="btn btn-danger btn-sm" href="{% url 'remove_from_exercise_cart_route' exercise_id=item.id%}">Remove</a>
        </div>
-       <h1>Total: ${{total}}</h1>
     </div>
-    <a class="btn btn-success btn-sm mt-3" href="{%url 'checkout_route'%}">Checkout</a>
+    {%endfor%}
 
+    {% for key, item in mealplan_cart.items %}
+    <h2>Mealplan</h2>
+    <div class="card">
+        <div class="card-header"> Title: {{item.title}}</div>
+       <div class="card-body">
+        <p>
+            Price: ${{item.price}}
+        </p>
+       </div>
+    </div>
+
+    <h1>Total: ${{total}}</h1>
+
+    <a class="btn btn-success btn-sm mt-3" href="{%url 'checkout_route'%}">Checkout</a>
 {%endfor%}
 {%endblock%}

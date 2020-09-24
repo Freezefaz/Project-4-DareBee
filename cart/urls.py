@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 import cart.views
 
 urlpatterns = [
@@ -9,5 +9,7 @@ urlpatterns = [
          name="remove_from_exercise_cart_route"),
     path('update/quantity/exercise/<exercise_id>',
          cart.views.update_exercise_cart_quantity,
-         name="update_exercise_cart_quantity_route")
+         name="update_exercise_cart_quantity_route"),
+    path(r"^add/(?P<mealplan_id>[^/]+$", cart.views.add_to_mealplan_cart,
+         name="add_to_mealplan_cart_route"),
 ]

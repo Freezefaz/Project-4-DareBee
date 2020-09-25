@@ -41,6 +41,7 @@ class Mealplan(models.Model):
     description = models.CharField(blank=False, max_length=255)
     price = models.PositiveIntegerField(blank=False)
     mealplan_type = models.ForeignKey(MealplanType, on_delete=models.CASCADE)
+    cover = CloudinaryField()
 
     # to make string
     def __str__(self):

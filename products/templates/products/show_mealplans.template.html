@@ -1,4 +1,5 @@
 {%extends 'base.template.html'%}
+{% load cloudinary %}
 
 {%block title%}Mealplans{%endblock%}
 
@@ -9,6 +10,7 @@
 <ul>
     {%for each_mealplan in all_mealplans%}
     <li>
+        {% cloudinary each_mealplan.cover class="mealplan_cover"%}
         <a href="{% url 'mealplan_details_route' mealplan_id=each_mealplan.id %}">{{each_mealplan.title}}</a> 
         <a href="{% url 'update_mealplan_route' mealplan_id=each_mealplan.id%}">Edit</a>
         <a href="{% url 'delete_mealplan_route' mealplan_id=each_mealplan.id%}">Delete</a>

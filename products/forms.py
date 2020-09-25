@@ -14,3 +14,4 @@ class MealplanForm(forms.ModelForm):
     class Meta:
         model = Mealplan
         exclude = ("type",)
+    cover = CloudinaryJsFileField()

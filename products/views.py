@@ -2,6 +2,7 @@ from .forms import ExerciseForm, MealplanForm
 from .models import Exercise, Mealplan
 from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.contrib import messages
 
 # Create your views here.
 

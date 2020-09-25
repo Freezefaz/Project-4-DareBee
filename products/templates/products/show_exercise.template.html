@@ -1,4 +1,5 @@
 {% extends 'base.template.html'%}
+{% load cloudinary %}
 
 
 {%block title%} Exercise {%endblock%}
@@ -9,6 +10,7 @@
         <ul>
             {% for each_exercise in all_exercises %}
             <li>
+                {% cloudinary each_exercise.cover class="exercise_cover"%}
                 <a href="{% url 'exercise_details_route' exercise_id=each_exercise.id %}">{{each_exercise.title}}</a> 
                 <a href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Edit</a>
                 <a href="{% url 'delete_exercise_route' exercise_id=each_exercise.id%}">Delete</a>

@@ -7,7 +7,7 @@
 
 {%block content %}
 <h1>Create Book</h1>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" id="form">
 	{% csrf_token %}
 	{{form|crispy}}
 	<input type="submit"/>

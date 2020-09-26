@@ -12,7 +12,8 @@
 <form method="POST" enctype="multipart/form-data" id="form">
     {% csrf_token %}
     {{form|crispy}}
-    <input type="submit"/>
+    <input class="btn btn-success" type="submit"  value="Create"/>
+    <a class="btn btn-danger" href="{% url 'view_all_mealplan_route' %}">Cancel</a>
 </form>
 
 <!-- for debugging -->

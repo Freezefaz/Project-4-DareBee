@@ -33,9 +33,11 @@ def create_exercise(request):
         # check if created form have valid values
         if create_form.is_valid():
             create_form.save()
+            messages.success(request, f"{create_form.cleaned_data['title']} has been created")
             return redirect(reverse(show_exercise))
         else:
             # if does not have any valid values and re-render the form
+            messages.errors(request, f"{create_form.cleaned_data['title']} has not been created")
             return render(request, "products/create_exercise.template.html", {
                 "form": create_form
             })
@@ -57,6 +59,7 @@ def update_exercise(request, exercise_id):
         exercise_form = ExerciseForm(request.POST, instance=exercise_to_update)
         if exercise_form.is_valid():
             exercise_form.save()
+            messages.success(request, f"{exercise_form.cleaned_data['title']} has been updated")
             return redirect(reverse(show_exercise))
     else:
         # create form and fill it with data
@@ -70,6 +73,7 @@ def delete_exercise(request, exercise_id):
     # return HttpResponse("Delete Exercise")
     exercise_to_delete = get_object_or_404(Exercise, pk=exercise_id)
     if request.method == "POST":
+        messages.success(request, f"{exercise_to_delete.title} has been deleted")
         exercise_to_delete.delete()
         return redirect(show_exercise)
     else:
@@ -106,6 +110,7 @@ def create_mealplan(request):
         # check if form have valid values
         if create_form.is_valid():
             create_form.save()
+            messages.success(request, f"{create_form.cleaned_data['title']} has been created")
             return redirect(reverse(show_mealplans))
         else:
             # if no valid values, re-render form
@@ -128,6 +133,7 @@ def update_mealplan(request, mealplan_id):
         mealplan_form = MealplanForm(request.POST, instance=mealplan_to_update)
         if mealplan_form.is_valid():
             mealplan_form.save()
+            messages.success(request, f"{mealplan_form.cleaned_data['title']} has been updated")
             return redirect(reverse(show_mealplans))
         else:
             return render(request, "products/update_mealplan.template.html", {
@@ -144,6 +150,7 @@ def delete_mealplan(request, mealplan_id):
     # return HttpResponse("Delete")
     mealplan_to_delete = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
+        messages.success(request, f"{mealplan_to_delete.title} has been deleted")
         mealplan_to_delete.delete()
         return redirect(show_mealplans)
     else:

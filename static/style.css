@@ -59,7 +59,7 @@ nav img {
 }
 /* end of welcome template */
 
-/* Start of show exercise template */
+/* Start of show exercise/mealplan template */
 
 .exercise_cover {
     /* max-width: 500px;
@@ -75,7 +75,10 @@ nav img {
 
 /* end of show exercise template */
 
-
+/* for delete exercise/ mealplan template */
+.delete-form {
+    margin: 10px;
+}
 
 
 /* Footer */

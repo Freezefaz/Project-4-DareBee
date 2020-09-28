@@ -6,13 +6,22 @@ body {
     margin: 0;
     border: 0;
 }
+/* general navbar */
 nav {
-    background: white;
-    margin-bottom: 15px;
+    /* background: white; */
+    background: #9BA2A7;
+    /* margin-bottom: 15px; */
 }
 nav img {
-    width: 20vw;
+    width: 50%;
 }
+
+/* user navbar */
+#user-name, #cart-name {
+    /* color: #ffcd3c; */
+    color: white;
+}
+
 
 /* welcome template */
 #home-jumbo {

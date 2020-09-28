@@ -7,7 +7,9 @@
 {% block content %}
 
     <h1>All Exercises</h1>
+    {% if request.user.is_superuser %}
         <a class="btn btn-primary" href="{% url 'create_exercise_route' %}">Create Exercise</a>
+    {%endif%}
 
         <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -17,16 +19,29 @@
         </div>
         </div>
 
-        <ul>
-            {% for each_exercise in all_exercises %}
-            <li>
-                {% cloudinary each_exercise.cover class="exercise_cover"%}
-                <a href="{% url 'exercise_details_route' exercise_id=each_exercise.id %}">{{each_exercise.title}}</a> 
+    <div class="row d-flex justify-content-center">
+        {% for each_exercise in all_exercises %}
+    <div class="card border-dark mb-3 mr-1 col-xs-6 col-sm-4 col-md-4" style="width: 80rem;  min-width: 300px;">
+        <div class="card-header">
+            <h5><a href="{% url 'exercise_details_route' exercise_id=each_exercise.id %}">{{each_exercise.title}}</a></h5>
+            {% if request.user.is_superuser %}
                 <a class="btn btn-primary" href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Edit</a>
                 <a class="btn btn-danger" href="{% url 'delete_exercise_route' exercise_id=each_exercise.id%}">Delete</a>
-                <a class="btn btn-dark" href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}">Add to Cart</a>
-            </li>
+            {%endif%}
+        </div>
+        <div class="card-body d-flex flex-column">
+        <div class="card-img-left">
+            <!-- <img src="{{each_accident_report.image_url}}"> -->
+            {% cloudinary each_exercise.cover class="exercise_cover"%}
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Description:</strong> {{each_exercise.description}}</li>
+            <li class="list-group-item"><strong>Type:</strong> {{each_exercise.exercise_type}}</li>
         </ul>
-	{% endfor %}
+            <a class="btn btn-dark mt-auto" href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}">Add to Cart</a>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
 
 {% endblock %}

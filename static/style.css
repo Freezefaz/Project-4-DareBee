@@ -28,10 +28,6 @@ nav img {
 
 
 /* welcome template */
-/* #welcome-block {
-    display: flex;
-    justify-content: center;
-} */
 
 #principles {
     background: white;
@@ -61,6 +57,24 @@ nav img {
     color: white;
     /* max-width: 1200px; */
 }
+/* end of welcome template */
+
+/* Start of show exercise template */
+
+/* card {
+    min-width: 500px;
+    min-height: auto;
+} */
+
+.exercise_cover {
+    /* max-width: 500px;
+    max-height: 350px; */
+    max-width: 100%;
+    height: auto;
+    min-width: 200px;
+}
+
+
 
 /* Footer */
 footer {

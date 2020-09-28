@@ -1,5 +1,7 @@
+/* base template */
 body {
     /* background-color: #0089ff; */
+    background-color: #5D8AA8;
     padding: 0;
     margin: 0;
     border: 0;
@@ -11,6 +13,8 @@ nav {
 nav img {
     width: 20vw;
 }
+
+/* welcome template */
 #home-jumbo {
     background-image: url('{% static "image/exercise-big.jpg"%}');
     background-repeat: no-repeat;
@@ -26,3 +30,15 @@ nav img {
     /* max-width: 1200px; */
 }
 
+/* Footer */
+footer {
+    padding: 10px;
+    background: #9BA2A7;
+     font-family: 'Roboto', sans-serif;
+}
+.footer-items a {
+    padding: 10px;
+    font-size: 30px;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}

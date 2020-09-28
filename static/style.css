@@ -17,6 +17,10 @@ nav img {
 }
 
 /* user navbar */
+#user-navbar {
+    margin-bottom: 0;
+    background: grey;
+}
 #user-name, #cart-name {
     /* color: #ffcd3c; */
     color: white;
@@ -24,6 +28,25 @@ nav img {
 
 
 /* welcome template */
+/* #welcome-block {
+    display: flex;
+    justify-content: center;
+} */
+
+#principles {
+    background: white;
+    /* background: #9BA2A7; */
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Roboto Condensed', sans-serif;
+    /* color: #c62511; */
+    color: #d6001c;
+    border-bottom: 5px solid black;
+}
+
 #home-jumbo {
     background-image: url('{% static "image/exercise-big.jpg"%}');
     background-repeat: no-repeat;
@@ -34,8 +57,8 @@ nav img {
     font-family: 'Roboto Condensed', sans-serif;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
     /* color: #c62511; */
-    color: #0089ff;
-    /* color: blue; */
+    /* color: #0089ff; */
+    color: white;
     /* max-width: 1200px; */
 }
 
@@ -44,6 +67,7 @@ footer {
     padding: 10px;
     background: #9BA2A7;
      font-family: 'Roboto', sans-serif;
+     border-top: 5px solid black;
 }
 .footer-items a {
     padding: 10px;

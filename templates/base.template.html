@@ -78,13 +78,13 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-    <nav id="user-navbar" class="navbar navbar-light bg-dark mt-0">
+    <nav id="user-navbar" class="navbar navbar-light bg-dark">
         <span id="user-name" class="navbar-brand mb-0 h1">Hello, {{ user.get_username }}</span>
         <a id="cart-name" class="navbar-brand" href="{% url 'view_cart_route' %}">Shopping Cart ({{number_of_items}})</a>
     </nav> 
     {% endif %} 
 
-
+    {%block welcome%}{%endblock%}
 
 
     <div class="container">

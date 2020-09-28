@@ -7,6 +7,15 @@
 
 <h1>All Mealplans</h1>
     <a class="btn btn-primary" href="{% url 'create_mealplan_route' %}">Create Mealplan</a>
+
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Mealplan</h1>
+        <p class="lead">Be Healthy</p>
+        <a class="btn btn-success" href="{% url 'view_all_mealplans_route' %}">Learn More</a>
+    </div>
+    </div>
+
     <ul>
         {%for each_mealplan in all_mealplans%}
         <li>

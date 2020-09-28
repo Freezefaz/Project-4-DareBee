@@ -61,11 +61,6 @@ nav img {
 
 /* Start of show exercise template */
 
-/* card {
-    min-width: 500px;
-    min-height: auto;
-} */
-
 .exercise_cover {
     /* max-width: 500px;
     max-height: 350px; */
@@ -73,6 +68,13 @@ nav img {
     height: auto;
     min-width: 200px;
 }
+.mealplan_cover {
+    max-width: 100%;
+    height: auto;
+}
+
+/* end of show exercise template */
+
 
 
 

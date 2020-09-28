@@ -1,5 +1,5 @@
 body {
-    background-color: #0089ff;
+    /* background-color: #0089ff; */
     padding: 0;
     margin: 0;
     border: 0;
@@ -11,3 +11,18 @@ nav {
 nav img {
     width: 20vw;
 }
+#home-jumbo {
+    background-image: url('{% static "image/exercise-big.jpg"%}');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    text-align: center;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    /* color: #c62511; */
+    color: #0089ff;
+    /* color: blue; */
+    /* max-width: 1200px; */
+}
+

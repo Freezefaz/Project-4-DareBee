@@ -8,37 +8,19 @@
 
 {% block content %}
 
-<h1>{{exercise.title}}</h1>
-{% cloudinary exercise.cover class="exercise-details-cover"%}
-
-<div class="row">
-  <div class="col-3">
-    Type:
-  </div>
-  <div class="col">
-    {{exercise.exercise_type}}
-  </div>
-</div>
-<div class="row">
-  <div class="col-3">
-    Price:
-  </div>
-  <div class="col">
-    {{exercise.price}}
-  </div>
-</div>
-<div class="row">
-  <div class="col-3">Description</div>
-  <div class="col">{{exercise.description}}</div>
+<div class="review-top">
+    <h1>Reviews for {{exercise.title}}</h1>
+    <div class="exercise-cover-wrapper">
+        {% cloudinary exercise.cover class="exercise-details-cover"%}
+    </div>
 </div>
 
-<h3>Reviews</h3>
 {% if user.is_authenticated %}
 <a class="btn btn-success mb-3" href="{% url 'create_exercise_review_route' exercise_id=exercise.id %}">Create Review</a>
 {% endif %}
 {% for r in exercise.exercisereview_set.all %}
 <div class="card mb-3">
-    <div class="card-header">
+    <div class="review-header card-header">
         <div class="review-wrapper mb-2"><strong>{{r.datetime}} by {{r.customer.username}}</strong></div>
         {% if r.customer == request.user %}
         <a class="btn btn-primary btn-sm" href="{% url 'update_exercise_review_route' exercisereview_id=r.id %}">Edit</a>

@@ -39,7 +39,7 @@ nav img {
     flex-direction: column;
     font-family: 'Roboto Condensed', sans-serif;
     /* color: #c62511; */
-    color: #d6001c;
+    color: #c62511;
     border-bottom: 5px solid black;
 }
 
@@ -60,7 +60,6 @@ nav img {
 /* end of welcome template */
 
 /* Start of show exercise/mealplan template */
-
 #products-search {
     background: #9BA2A7;
     padding: 10px;
@@ -78,7 +77,6 @@ nav img {
     max-width: 100%;
     height: auto;
 }
-
 /* end of show exercise template */
 
 /* for delete exercise/ mealplan template */
@@ -88,14 +86,28 @@ nav img {
 /* end of delete exercise/ mealplan template */
 
 /* For exercise/mealplan details template */
+
+.review-top {
+    display: flex;
+    /* justify-content: center; */
+    text-align: center;
+    flex-direction: column;
+    margin: 10px;
+    font-family:'Roboto Condensed', sans-serif;
+    /* color:#d6001c; */
+}
+
 .exercise-details-cover {
-    width: 50%;
+    width: 70%;
     height: auto;
 }
 .review-title {
     border-bottom: 1px solid black;
 }
-
+.review-header {
+    color:#d6001c;
+    background: #9BA2A7;
+}
 
 
 /* Footer */

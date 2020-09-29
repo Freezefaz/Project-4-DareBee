@@ -98,15 +98,23 @@ nav img {
 }
 
 .exercise-details-cover {
+    min-width: 330px;
     width: 70%;
     height: auto;
 }
+.mealplan-details-cover {
+    min-width: 330px;
+    width: 40%;
+    height: auto;
+}
+
 .review-title {
     border-bottom: 1px solid black;
 }
 .review-header {
     color:#d6001c;
     background: #9BA2A7;
+    /* background: #353A40; */
 }
 
 

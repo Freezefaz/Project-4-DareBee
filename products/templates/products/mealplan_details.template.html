@@ -1,4 +1,6 @@
 {% extends 'base.template.html' %} 
+{% load cloudinary %}
+{% load static %}
 
 {% block title %}
     Details for {{mealplan.title}}
@@ -6,38 +8,28 @@
 
 {% block content %}
 
-<h1>{{mealplan.title}}</h1>
-<div class="row">
-  <div class="col-3">
-    Type:
-  </div>
-  <div class="col">
-    {{mealplan.mealplan_type}}
-  </div>
-</div>
-<div class="row">
-  <div class="col-3">
-    Price:
-  </div>
-  <div class="col">
-    {{mealplan.price}}
-  </div>
-</div>
-<div class="row">
-  <div class="col-3">Description</div>
-  <div class="col">{{mealplan.description}}</div>
+<div class="review-top">
+    <h1>Reviews for {{mealplan.title}}</h1>
+    <div class="mealplan-cover-wrapper">
+        {% cloudinary mealplan.cover class="mealplan-details-cover"%}
+    </div>
 </div>
 
-<h3>Reviews</h3>
-<a class="btn btn-primary" href="{% url 'create_mealplan_review_route' mealplan_id=mealplan.id %}">Create</a>
+{% if user.is_authenticated %}
+<a class="btn btn-success mb-3" href="{% url 'create_mealplan_review_route' mealplan_id=mealplan.id %}">Create Review</a>
+{% endif %}
 {% for r in mealplan.mealplanreview_set.all %}
-<div class="card">
-  <div class="card-body">
-    <div class="card-title">{{r.title}}</div>
-    <a class="btn btn-primary" href="{% url 'update_mealplan_review_route' mealplanreview_id=r.id %}">Update</a>
-    <a class="btn btn-primary" href="{% url 'delete_mealplan_review_route' mealplanreview_id=r.id %}">Delete</a>
-    <p>on {{r.datetime}} by {{r.customer.username}}</p>
-    <div>
+<div class="card mb-3">
+    <div class="review-header card-header">
+        <div class="review-wrapper mb-2"><strong>{{r.datetime}} by {{r.customer.username}}</strong></div>
+        {% if r.customer == request.user %}
+        <a class="btn btn-primary btn-sm" href="{% url 'update_mealplan_review_route' mealplanreview_id=r.id %}">Edit</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'delete_mealplan_review_route' mealplanreview_id=r.id %}">Delete</a>
+        {%endif%}
+    </div>
+    <div class="card-body">
+    <h5 class="review-title card-title">{{r.title}}</h5>
+    <div class="card-text">
       {{r.content}}
     </div>
   </div>

@@ -33,8 +33,6 @@ def create_exercise_review(request, exercise_id):
                           "exercise": exercise
                       })
 
-
-# def update_exercise_review(request, exercise_id):
 # def update_exercise_review(request, exercise_id, exercisereview_id):
 def update_exercise_review(request, exercisereview_id):
     # exercise = get_object_or_404(Exercise, pk=exercise_id)
@@ -49,7 +47,8 @@ def update_exercise_review(request, exercisereview_id):
             # need to use the relationship id to get the exercise_id
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id":
-                                            exercise_review_to_update.exercise.id}))
+                                            exercise_review_to_update.exercise.id,}))
+                                            # "exercise_review_id": exercise_review_to_update.id}))
             # return redirect(reverse("exercise_details_route", kwargs={"exercise_review_id": exercise_review_id}))
     else:
         form = ExerciseReviewForm(instance=exercise_review_to_update)
@@ -77,7 +76,7 @@ def delete_exercise_review(request, exercisereview_id):
         return render(request, "reviews/delete_exercise_review.template.html",
                       {
                           "exercisereview": exercise_review_to_delete,
-                        #   "exercise": exercise
+                        #   "exercise":  exercise_review_to_delete.exercise
                       })
 
 # Mealplan

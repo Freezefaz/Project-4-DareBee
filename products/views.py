@@ -1,4 +1,4 @@
-from .forms import ExerciseForm, MealplanForm, SearchForm
+from .forms import ExerciseForm, MealplanForm, Exercise_SearchForm
 from .models import Exercise, Mealplan
 from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
@@ -36,7 +36,7 @@ def show_exercise(request):
 
 
     all_exercises = all_exercises.filter(queries)
-    search_form = SearchForm()
+    search_form = Exercise_SearchForm()
     return render(request, "products/show_exercise.template.html", {
         "all_exercises": all_exercises,
         "search_form": search_form
@@ -114,6 +114,9 @@ def view_exercise_details(request, exercise_id):
 def show_mealplans(request):
     # return HttpResponse("Mealplans")
     all_mealplans = Mealplan.objects.all()
+
+
+
     return render(request, "products/show_mealplans.template.html", {
         "all_mealplans": all_mealplans
     })

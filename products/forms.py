@@ -17,7 +17,7 @@ class MealplanForm(forms.ModelForm):
     cover = CloudinaryJsFileField()
 
 
-class SearchForm(forms.Form):
+class Exercise_SearchForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     exercise_type = forms.ModelChoiceField(
         queryset=ExerciseType.objects.all(), required=False

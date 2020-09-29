@@ -60,9 +60,8 @@ nav img {
 /* end of welcome template */
 
 /* Start of show exercise/mealplan template */
-#exercise-jumbo {
-    /* background-image: url('{% static "image/exercise3.jpg"%}'); */
-    background: url("/static/image/exercise3.jpg");
+#exercise-jumbo, #mealplan-jumbo {
+    /* background: url("/static/image/exercise3.jpg"); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;

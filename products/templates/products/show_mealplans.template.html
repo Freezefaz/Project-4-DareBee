@@ -1,20 +1,24 @@
 {%extends 'base.template.html'%}
 {% load cloudinary %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 
 {%block title%}Mealplans{%endblock%}
 
 {%block content%}
 
-<h1>All Mealplans</h1>
 {% if request.user.is_superuser %}
     <a class="btn btn-primary" href="{% url 'create_mealplan_route' %}">Create Mealplan</a>
  {%endif%}
-    <div class="jumbotron jumbotron-fluid">
-    <div class="container">
+    <div id="mealplan-jumbo" class="jumbotron jumbotron-fluid" style="background-image: url('{% static "image/mealplan1.jpg"%}')">
+    <div class="container image-inner">
         <h1 class="display-4">Mealplan</h1>
-        <p class="lead">Be Healthy</p>
+        <ul>
+            <li><h3>Be a member to purchase</h3></li>
+            <li><h3>Comes with a recipe book and video links</h3></li>
+            <li><h3>Cook in the comfort of your home</h3></li>
+        </ul>  
     </div>
     </div>
 

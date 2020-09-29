@@ -6,10 +6,11 @@
 {% block content %}
 <h1>Create review for {{mealplan.title}}</h1>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="m-3">
     {% csrf_token %}
     {{form|crispy}}
-    <input type="submit"/>
+    <input class="btn btn-success" type="submit"  value="Create"/>
+    <a class="btn btn-danger" href="{% url 'mealplan_details_route' mealplan_id=mealplan.id%}">Cancel</a>
 </form>
 
 {%endblock%}

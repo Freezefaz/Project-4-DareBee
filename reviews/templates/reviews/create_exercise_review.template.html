@@ -6,10 +6,11 @@
 {% block content %}
 <h1>Create review for {{exercise.title}}</h1>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="m-3">
     {% csrf_token %}
     {{form|crispy}}
-    <input type="submit"/>
+    <input class="btn btn-success" type="submit"  value="Create"/>
+    <a class="btn btn-danger" href="{% url 'exercise_details_route' exercise_id=exercise.id%}">Cancel</a>
 </form>
 
 {%endblock%}

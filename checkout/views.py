@@ -8,6 +8,7 @@ from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 import json
 from uuid import UUID
+from django.contrib import messages
 
 # Create your views here.
 class UUIDEncoder(json.JSONEncoder):
@@ -99,12 +100,14 @@ def checkout(request):
 
 def checkout_success(request):
     # empty the shopping cart
-    # request.session['shopping_cart'] = {}
-     # request.session['mealplan_shopping_cart'] = {}
-    return HttpResponse("Payment is successful")
+    request.session['shopping_cart'] = {}
+    request.session['mealplan_shopping_cart'] = {}
+    messages.success(request,"Checkout Success!")
+    return redirect(reverse('home_route'))
 
 def checkout_cancelled(request):
-    return HttpResponse("Payment is cancelled")
+    messages.error(request,"Error in Checkout!")
+    return redirect(reverse('home_route'))
 
 @csrf_exempt
 def payment_completed(request):

@@ -8,8 +8,9 @@
 {%block content%}
 
 <h1>All Mealplans</h1>
+{% if request.user.is_superuser %}
     <a class="btn btn-primary" href="{% url 'create_mealplan_route' %}">Create Mealplan</a>
-
+ {%endif%}
     <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Mealplan</h1>

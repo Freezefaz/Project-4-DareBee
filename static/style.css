@@ -87,6 +87,17 @@ nav img {
 }
 /* end of delete exercise/ mealplan template */
 
+/* For exercise/mealplan details template */
+.exercise-details-cover {
+    width: 50%;
+    height: auto;
+}
+.review-title {
+    border-bottom: 1px solid black;
+}
+
+
+
 /* Footer */
 footer {
     padding: 10px;

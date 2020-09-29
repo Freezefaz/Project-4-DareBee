@@ -1,5 +1,7 @@
 {%extends 'base.template.html'%}
 {% load cloudinary %}
+{% load crispy_forms_tags %}
+
 
 {%block title%}Mealplans{%endblock%}
 
@@ -13,6 +15,14 @@
         <h1 class="display-4">Mealplan</h1>
         <p class="lead">Be Healthy</p>
     </div>
+    </div>
+
+    <div id="products-search" class="container mb-5">
+        <h3>Search</h3>
+        <form method="GET">
+        {{search_form|crispy}}
+        <input class="btn btn-danger" type="submit" value="Search"/>
+        </form>
     </div>
 
      <div class="row d-flex justify-content-center">

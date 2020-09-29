@@ -130,7 +130,7 @@ def show_mealplans(request):
 
     all_mealplans = all_mealplans.filter(queries)
     search_form = Mealplan_SearchForm()
-    return render(request, "products/show_exercise.template.html", {
+    return render(request, "products/show_mealplans.template.html", {
         "all_mealplans": all_mealplans,
         "search_form": search_form
     })

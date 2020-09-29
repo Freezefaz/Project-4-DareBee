@@ -6,7 +6,7 @@
 
 <form method="POST">
 	{% csrf_token %}
-	<div class="delete-form">
+	<div class="delete-form m-3" >
 	    <h2>Are you sure you want to delete <strong>{{mealplan.title}}</strong>?</h2>
     <div class="delete-controls">
         <input class="btn btn-danger" type="submit" value="Yes, delete"/>

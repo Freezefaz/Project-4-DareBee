@@ -5,7 +5,7 @@
 
 {%block content%}
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="m-3">
     {% csrf_token %}
 	{{form|crispy}}
     <input class="btn btn-success" type="submit"  value="Update"/>

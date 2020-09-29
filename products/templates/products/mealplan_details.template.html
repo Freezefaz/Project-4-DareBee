@@ -22,10 +22,10 @@
 <div class="card mb-3">
     <div class="review-header card-header">
         <div class="review-wrapper mb-2"><strong>{{r.datetime}} by {{r.customer.username}}</strong></div>
-        {% if r.customer == request.user %}
+        <!-- {% if r.customer == request.user %}
         <a class="btn btn-primary btn-sm" href="{% url 'update_mealplan_review_route' mealplanreview_id=r.id %}">Edit</a>
         <a class="btn btn-danger btn-sm" href="{% url 'delete_mealplan_review_route' mealplanreview_id=r.id %}">Delete</a>
-        {%endif%}
+        {%endif%} -->
     </div>
     <div class="card-body">
     <h5 class="review-title card-title">{{r.title}}</h5>

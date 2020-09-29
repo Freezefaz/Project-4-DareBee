@@ -1,22 +1,25 @@
 {% extends 'base.template.html'%}
 {% load cloudinary %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 
 {%block title%} Exercise {%endblock%}
 
 {% block content %}
 
-    <h1>All Exercises</h1>
     {% if request.user.is_superuser %}
         <a class="btn btn-primary" href="{% url 'create_exercise_route' %}">Create Exercise</a>
     {%endif%}
 
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
+        <div id="exercise-jumbo" class="jumbotron jumbotron-fluid" >
+            <div class="container image-inner">
                 <h1 class="display-4">Exercise</h1>
-                <p class="lead">Be Fit</p>
-                <a class="btn btn-success" href="{% url 'view_all_exercise_route' %}">Learn More</a>
+                <ul>
+                    <li><h3>Be a member to purchase</h3></li>
+                    <li><h3>Comes with a instruciton guide and video links</h3></li>
+                    <li><h3>Exercise at the comfort of your home</h3></li>
+                </ul>  
+                <!-- <p class="lead">Be Fit</p> -->
             </div>
         </div>
     <div id="products-search" class="container mb-5">

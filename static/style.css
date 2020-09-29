@@ -43,8 +43,8 @@ nav img {
     border-bottom: 5px solid black;
 }
 
-#home-jumbo {
-    background-image: url('{% static "image/exercise-big.jpg"%}');
+#home-jumbo-exercise, #home-jumbo-mealplan {
+    /* background-image: url('{% static "image/exercise-big.jpg"%}'); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -60,6 +60,23 @@ nav img {
 /* end of welcome template */
 
 /* Start of show exercise/mealplan template */
+#exercise-jumbo {
+    /* background-image: url('{% static "image/exercise3.jpg"%}'); */
+    background: url("/static/image/exercise3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.image-inner {
+    background-color:rgba(255, 255, 255, 0.5);
+    padding:0.5em;
+}
+.image-inner ul {
+    list-style-type: none;
+}
+
 #products-search {
     background: #9BA2A7;
     padding: 10px;
@@ -86,7 +103,6 @@ nav img {
 /* end of delete exercise/ mealplan template */
 
 /* For exercise/mealplan details template */
-
 .review-top {
     display: flex;
     /* justify-content: center; */

@@ -45,8 +45,9 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Description:</strong> {{each_exercise.description}}</li>
             <li class="list-group-item"><strong>Type:</strong> {{each_exercise.exercise_type}}</li>
+            <li class="list-group-item"><strong>Price:</strong> SGD {{each_exercise.price}}</li>
         </ul>
-            <a class="btn btn-dark mt-auto" href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}">Add to Cart</a>
+            <a class="btn btn-dark mt-auto" href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
         </div>
     </div>
     {% endfor %}

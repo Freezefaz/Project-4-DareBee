@@ -173,7 +173,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 
 # the url to go to if the user has logged in successful
-LOGIN_REDIRECT_URL = '/success'
+LOGIN_REDIRECT_URL = "/"
 
 # simulate Django send email but gitpod don't allow
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

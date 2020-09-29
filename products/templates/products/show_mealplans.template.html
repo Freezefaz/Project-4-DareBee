@@ -42,8 +42,9 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>Description:</strong> {{each_mealplan.description}}</li>
             <li class="list-group-item"><strong>Type:</strong> {{each_mealplan.mealplan_type}}</li>
+            <li class="list-group-item"><strong>Price:</strong> SGD {{each_mealplan.price}}</li>
         </ul>
-            <a class="btn btn-dark mt-auto" href="{% url 'add_to_mealplan_cart_route' mealplan_id=each_mealplan.id%}">Add to Cart</a>
+            <a class="btn btn-dark mt-auto" href="{% url 'add_to_mealplan_cart_route' mealplan_id=each_mealplan.id%}"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
         </div>
     </div>
     {% endfor %}

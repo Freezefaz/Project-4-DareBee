@@ -1,5 +1,5 @@
 from django import forms
-from .models import Exercise, Mealplan
+from .models import Exercise, Mealplan, ExerciseType
 from cloudinary.forms import CloudinaryJsFileField
 
 
@@ -15,3 +15,11 @@ class MealplanForm(forms.ModelForm):
         model = Mealplan
         exclude = ("type",)
     cover = CloudinaryJsFileField()
+
+
+class SearchForm(forms.Form):
+    title = forms.CharField(max_length=100, required=False)
+    exercise_type = forms.ModelChoiceField(
+        queryset=ExerciseType.objects.all(), required=False
+    )
+    price = forms.CharField(max_length=100, required=False)

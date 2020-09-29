@@ -6,9 +6,14 @@
 
 <form method="POST">
 	{% csrf_token %}
-	Are you sure you want to delete {{profile.first_name}} {{profile.last_name}}?
-	<input type="submit" value="Yes, delete"/>
-    <a href="{% url 'show_profiles_route' %}">No</a>
+    <div class="delete-form m-3">
+	    <h2>Are you sure you want to delete<strong> {{profile.first_name}} {{profile.last_name}}</strong>?</h2>
+    <div class="delete-controls">
+        <input class="btn btn-danger" type="submit" value="Yes, delete"/>
+        <a class="btn btn-success" href="{% url 'show_profiles_route' %}">No</a>
+    </div>
+    </div>
+	
 </form>
 
 {%endblock%}

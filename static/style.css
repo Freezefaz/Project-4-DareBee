@@ -61,6 +61,12 @@ nav img {
 
 /* Start of show exercise/mealplan template */
 
+#exercise-search {
+    background: #9BA2A7;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .exercise_cover {
     /* max-width: 500px;
     max-height: 350px; */

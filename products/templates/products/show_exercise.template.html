@@ -1,5 +1,6 @@
 {% extends 'base.template.html'%}
 {% load cloudinary %}
+{% load crispy_forms_tags %}
 
 
 {%block title%} Exercise {%endblock%}
@@ -12,12 +13,19 @@
     {%endif%}
 
         <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Exercise</h1>
-            <p class="lead">Be Fit</p>
-            <a class="btn btn-success" href="{% url 'view_all_exercise_route' %}">Learn More</a>
+            <div class="container">
+                <h1 class="display-4">Exercise</h1>
+                <p class="lead">Be Fit</p>
+                <a class="btn btn-success" href="{% url 'view_all_exercise_route' %}">Learn More</a>
+            </div>
         </div>
-        </div>
+    <div id="exercise-search" class="container mb-5">
+        <h3>Search</h3>
+        <form method="GET">
+        {{search_form|crispy}}
+        <input class="btn btn-danger" type="submit" value="Search"/>
+        </form>
+    </div>
 
     <div class="row d-flex justify-content-center">
         {% for each_exercise in all_exercises %}

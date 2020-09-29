@@ -5,15 +5,41 @@
 
 {% block content %}
 
+<!-- <h1>All Profiles</h1> -->
+<div class="table-responsive">
+    <table class="table table-hover mt-5 mb-5">
     <h1>All Profiles</h1>
-        <ul>
-            {% for each_profile in all_profiles %}
-            <li>
-                {{each_profile.first_name}} {{each_profile.last_name}}
-                <a href="{% url 'update_profile_route' profile_id=each_profile.id%}">Edit</a>
-                <a href="{% url 'delete_profile_route' profile_id=each_profile.id%}">Delete</a>
-            </li>
-        </ul>
-	{% endfor %}
+    <thead>
+        <tr>
+        <th scope="col">Username</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">DOB</th>
+        <th scope="col">Height</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Goals</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for each_profile in all_profiles %}
+        <tr>
+        <td>
+        {{each_profile.customer}}
+        <div class="profile-control">
+            <a class="btn btn-primary btn-sm mt-1" href="{% url 'update_profile_route' profile_id=each_profile.id%}">Edit</a>
+            <a class="btn btn-danger btn-sm mt-1" href="{% url 'delete_profile_route' profile_id=each_profile.id%}">Delete</a>
+        </div>
+        </td>
+        <td>{{each_profile.first_name}} </td>
+        <td>{{each_profile.last_name}}</td>
+        <td>{{each_profile.dob}}</td>
+        <td>{{each_profile.height}}</td>
+        <td>{{each_profile.weight}}</td>
+        <td>{{each_profile.goals}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
 
 {% endblock %}

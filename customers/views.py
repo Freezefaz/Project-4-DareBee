@@ -62,3 +62,15 @@ def delete_profile(request, profile_id):
         return render(request, "customers/delete_profile.template.html", {
             "profile": profile_to_delete
         })
+
+
+    # <h1>All Profiles</h1>
+    #     <ul>
+    #         {% for each_profile in all_profiles %}
+    #         <li>
+    #             {{each_profile.first_name}} {{each_profile.last_name}}
+    #             <a href="{% url 'update_profile_route' profile_id=each_profile.id%}">Edit</a>
+    #             <a href="{% url 'delete_profile_route' profile_id=each_profile.id%}">Delete</a>
+    #         </li>
+    #     </ul>
+	# {% endfor %}

@@ -1,8 +1,9 @@
-from .forms import ExerciseForm, MealplanForm
+from .forms import ExerciseForm, MealplanForm, SearchForm
 from .models import Exercise, Mealplan
 from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
 
@@ -20,8 +21,25 @@ def index(request):
 def show_exercise(request):
     # return HttpResponse("Exercise")
     all_exercises = Exercise.objects.all()
+    queries = ~Q(pk__in=[])
+
+    if request.GET:
+        # get books that have the search terms in the title
+        if "title" in request.GET and request.GET["title"]:
+            queries = queries & Q(title__icontains=request.GET["title"])
+
+        if "exercise_type" in request.GET and request.GET["exercise_type"]:
+            queries = queries & Q(exercise_type=request.GET["exercise_type"])
+
+        if "price" in request.GET and request.GET["price"]:
+            queries = queries & Q(price_icontains=request.GET["price"])
+
+
+    all_exercises = all_exercises.filter(queries)
+    search_form = SearchForm()
     return render(request, "products/show_exercise.template.html", {
-        "all_exercises": all_exercises
+        "all_exercises": all_exercises,
+        "search_form": search_form
     })
 
 # create exercise

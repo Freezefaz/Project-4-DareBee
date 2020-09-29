@@ -1,4 +1,4 @@
-from .forms import ExerciseForm, MealplanForm, Exercise_SearchForm
+from .forms import ExerciseForm, MealplanForm, Exercise_SearchForm, Mealplan_SearchForm
 from .models import Exercise, Mealplan
 from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
@@ -32,7 +32,7 @@ def show_exercise(request):
             queries = queries & Q(exercise_type=request.GET["exercise_type"])
 
         if "price" in request.GET and request.GET["price"]:
-            queries = queries & Q(price_icontains=request.GET["price"])
+            queries = queries & Q(price=request.GET["price"])
 
 
     all_exercises = all_exercises.filter(queries)
@@ -114,12 +114,27 @@ def view_exercise_details(request, exercise_id):
 def show_mealplans(request):
     # return HttpResponse("Mealplans")
     all_mealplans = Mealplan.objects.all()
+    queries = ~Q(pk__in=[])
+
+    if request.GET:
+        # get books that have the search terms in the title
+        if "title" in request.GET and request.GET["title"]:
+            queries = queries & Q(title__icontains=request.GET["title"])
+
+        if "mealplan_type" in request.GET and request.GET["mealplan_type"]:
+            queries = queries & Q(mealplan_type=request.GET["mealplan_type"])
+
+        if "price" in request.GET and request.GET["price"]:
+            queries = queries & Q(price=request.GET["price"])
 
 
-
-    return render(request, "products/show_mealplans.template.html", {
-        "all_mealplans": all_mealplans
+    all_mealplans = all_mealplans.filter(queries)
+    search_form = Mealplan_SearchForm()
+    return render(request, "products/show_exercise.template.html", {
+        "all_mealplans": all_mealplans,
+        "search_form": search_form
     })
+
 
 # create mealplan
 

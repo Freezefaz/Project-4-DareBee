@@ -50,7 +50,9 @@
             <li class="list-group-item"><strong>Type:</strong> {{each_exercise.exercise_type}}</li>
             <li class="list-group-item"><strong>Price:</strong> SGD {{each_exercise.price}}</li>
         </ul>
+        {% if user.is_authenticated %}
             <a class="btn btn-dark mt-auto" href="{% url 'add_to_exercise_cart_route' exercise_id=each_exercise.id%}"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+        {% endif %}
         </div>
     </div>
     {% endfor %}

@@ -49,7 +49,9 @@
             <li class="list-group-item"><strong>Type:</strong> {{each_mealplan.mealplan_type}}</li>
             <li class="list-group-item"><strong>Price:</strong> SGD {{each_mealplan.price}}</li>
         </ul>
+        {% if user.is_authenticated %}
             <a class="btn btn-dark mt-auto" href="{% url 'add_to_mealplan_cart_route' mealplan_id=each_mealplan.id%}"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+        {% endif %}
         </div>
     </div>
     {% endfor %}

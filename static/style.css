@@ -1,7 +1,8 @@
 /* base template */
 body {
     /* background-color: #0089ff; */
-    background-color: #5D8AA8;
+    /* background-color: #5D8AA8; */
+    background-color: #0070b7;
     padding: 0;
     margin: 0;
     border: 0;
@@ -9,7 +10,8 @@ body {
 /* general navbar */
 nav {
     /* background: white; */
-    background: #9BA2A7;
+    /* background: #9BA2A7; */
+    background:#BDBDBD;
     /* margin-bottom: 15px; */
 }
 nav img {
@@ -140,7 +142,8 @@ h1, h2, h3 {
 /* Footer */
 footer {
     padding: 10px;
-    background: #9BA2A7;
+    /* background: #9BA2A7; */
+    background: white;
      font-family: 'Roboto', sans-serif;
      border-top: 5px solid black;
 }

@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from django.conf import settings
 import stripe
 from products.models import Exercise, Mealplan
+from customers.models import Customer
 from django.contrib.auth.models import User
 from .models import Exercise_Purchase, Mealplan_Purchase
 from django.contrib.sites.models import Site
@@ -11,11 +12,14 @@ from uuid import UUID
 from django.contrib import messages
 
 # Create your views here.
+
+
 class UUIDEncoder(json.JSONEncoder):
-    def default(self,obj):
-        if isinstance(obj,UUID):
+    def default(self, obj):
+        if isinstance(obj, UUID):
             return obj.hex
-        return json.JSONEncoder.default(self,obj)
+        return json.JSONEncoder.default(self, obj)
+
 
 def checkout(request):
     # tell stripe what api key is
@@ -68,7 +72,6 @@ def checkout(request):
             # "qty": item["qty"]
         })
 
-
     # get current website
     current_site = Site.objects.get_current()
     # get the domain name
@@ -96,18 +99,20 @@ def checkout(request):
         'session_id': session.id,
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
-    
+
 
 def checkout_success(request):
     # empty the shopping cart
     request.session['shopping_cart'] = {}
     request.session['mealplan_shopping_cart'] = {}
-    messages.success(request,"Checkout Success!")
+    messages.success(request, "Checkout Success!")
     return redirect(reverse('home_route'))
 
+
 def checkout_cancelled(request):
-    messages.error(request,"Error in Checkout!")
+    messages.error(request, "Error in Checkout!")
     return redirect(reverse('home_route'))
+
 
 @csrf_exempt
 def payment_completed(request):
@@ -138,7 +143,6 @@ def payment_completed(request):
         session = event["data"]["object"]
         handle_payment(session)
     return HttpResponse(status=200)
-    
 
 
 def handle_payment(session):
@@ -147,11 +151,12 @@ def handle_payment(session):
     print(customer)
 
     # change the metadata from string back to array
-    
+
     # all_exercise_ids = session["metadata"]["all_exercise_ids"].split(",")
     all_exercise_ids = json.loads(session["metadata"]["all_exercise_ids"])
     for exercise in all_exercise_ids:
-        exercise_model = get_object_or_404(Exercise, pk=exercise["exercise_id"])
+        exercise_model = get_object_or_404(
+            Exercise, pk=exercise["exercise_id"])
         print(exercise_model)
 
         # create the purchase model
@@ -163,7 +168,8 @@ def handle_payment(session):
 
     all_mealplan_ids = json.loads(session["metadata"]["all_mealplan_ids"])
     for mealplan in all_mealplan_ids:
-        mealplan_model = get_object_or_404(Mealplan, pk=mealplan["mealplan_id"])
+        mealplan_model = get_object_or_404(
+            Mealplan, pk=mealplan["mealplan_id"])
         print("hi3")
         # create the purchase model
         mealplan_purchase = Mealplan_Purchase()
@@ -172,3 +178,11 @@ def handle_payment(session):
         mealplan_purchase.price = mealplan_model.price
         mealplan_purchase.save()
 
+
+def view_purchases(request):
+    exercise_purchase = Exercise_Purchase.objects.filter(customer=request.user)
+    mealplan_purchase = Mealplan_Purchase.objects.filter(customer=request.user)
+    return render(request, "checkout/user_purchases.template.html", {
+        "exercise_purchase": exercise_purchase,
+        "mealplan_purchase": mealplan_purchase
+    })

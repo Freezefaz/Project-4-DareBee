@@ -11,12 +11,17 @@ body {
 /* nav */
 #general-navbar {
     background: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #d6001c;
     /* background: #9BA2A7; */
     /* background:#BDBDBD; */
     /* margin-bottom: 15px; */
 }
 nav img {
     width: 50%;
+}
+.nav-item a {
+    color: #d6001c
 }
 
 /* user navbar */
@@ -27,12 +32,22 @@ nav img {
 #user-name, #cart-name {
     /* color: #ffcd3c; */
     color: white;
+    font-family: 'Roboto Condensed', sans-serif;
 }
+/* end of base template */
 
 h1, h2, h3 {
     font-family: 'Roboto Condensed', sans-serif;
+    color: white;
 }
 
+.card {
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-header {
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
 /* welcome template */
 
@@ -179,8 +194,14 @@ h1, h2, h3 {
 }
 /* End of exercise/mealplan details template*/
 
-/* For checkout template */
+/* For cart Template */
 
+
+
+/* End of cart template */
+
+
+/* For checkout template */
 .table {
 
     font-family: 'Roboto', sans-serif;
@@ -189,7 +210,6 @@ h1, h2, h3 {
 .table h1 {
      color: white;
 }
-
 /* End of checkout template */
 
 /* For All Auth templates */
@@ -201,6 +221,7 @@ h1, h2, h3 {
 .allauth-template h1 {
     font-family:'Roboto Condensed', sans-serif;
 }
+/* End of all auth template */
 
 /* Footer */
 footer {

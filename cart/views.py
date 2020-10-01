@@ -45,7 +45,7 @@ def add_to_mealplan_cart(request, mealplan_id):
         messages.success(request, f"{mealplan.title} added to your cart!")
         return redirect(reverse("view_all_mealplans_route"))
     else:
-        messages.error(request, "Mealplan already added to your cart!")
+        messages.success(request, f"{mealplan.title} already added to your cart!")
         return redirect(reverse("view_all_mealplans_route"))
 
 

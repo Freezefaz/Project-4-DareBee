@@ -2,15 +2,16 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from .models import Customer, Profile
 from django.contrib.auth.models import User
 from .forms import ProfileForm
-
 import products.views
 # Create your views here.
 
 
 def show_profiles(request):
+    all_customers = User.objects.all()
     all_profiles = Profile.objects.all()
     return render(request, "customers/show_profiles.template.html", {
-        "all_profiles": all_profiles
+        "all_profiles": all_profiles,
+        "all_customers": all_customers
     })
 
 
@@ -52,6 +53,7 @@ def update_profile(request, profile_id):
             "form": profile_form
         })
 
+
 def delete_profile(request, profile_id):
     # return HttpResponse("Delete Exercise")
     profile_to_delete = get_object_or_404(Profile, pk=profile_id)
@@ -63,7 +65,6 @@ def delete_profile(request, profile_id):
             "profile": profile_to_delete
         })
 
-
     # <h1>All Profiles</h1>
     #     <ul>
     #         {% for each_profile in all_profiles %}
@@ -73,4 +74,4 @@ def delete_profile(request, profile_id):
     #             <a href="{% url 'delete_profile_route' profile_id=each_profile.id%}">Delete</a>
     #         </li>
     #     </ul>
-	# {% endfor %}
+        # {% endfor %}

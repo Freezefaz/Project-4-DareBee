@@ -4,36 +4,30 @@
 {%block title%}DAREbee{%endblock%}
 
 {%block welcome%}
-    <div id="principles" class="container-fluid">
+    <div id="home-jumbo-exercise" class="jumbotron jumbotron-fluid mt-0 mb-0 parallax" style="background-image: url('{% static "image/exercise2.jpg"%}')">
         <div class="container">
-        <h1>Fitness on your own terms!</h2>
-        <div>
-            <ul>
-                <li><h3>No Gym!</h3></li>
-                <li><h3>No Equipment!</h3></li>
-                <li><h3>Just YOU and YOUR body!</h3></li>
-            </ul>  
-        </div>
+            <h1 class="display-4">Exercise</h1>
+            <p class="lead"><strong>Anytime Anywhere</strong></p>
+            <p class="lead"><strong>Don't be constrained</strong></p>
+            <a class="btn btn-primary" href="{% url 'view_all_exercise_route' %}">Learn More</a>
         </div>
     </div>
-{%endblock%}
 
-{%block content%}
-    <div id="home-jumbo-exercise" class="jumbotron jumbotron-fluid" style="background-image: url('{% static "image/exercise2.jpg"%}')">
-    <div class="container">
-        <h1 class="display-4">Exercise</h1>
-        <p class="lead"><strong>Anytime Anywhere</strong></p>
-        <p class="lead"><strong>Don't be constrained</strong></p>
-        <a class="btn btn-success" href="{% url 'view_all_exercise_route' %}">Learn More</a>
-    </div>
+    <div id="principles" class="container-fluid mb-3 mt-3">
+        <div class="container">
+            <h1>Fitness on your own terms</h1>
+            <h3>No Gym</h3>
+            <h3>No Equipment</h3>
+            <h3>Just YOU and YOUR body</h3>
+        </div>
     </div>
 
-    <div id="home-jumbo-mealplan" class="jumbotron jumbotron-fluid" style="background-image: url('{% static "image/mealplan3.jpg"%}')">
-    <div class="container">
-        <h1 class="display-4">Mealplan</h1>
-        <p class="lead">Feed your Body and your Soul</p>
-        <p class="lead">Take care of your body and it will take care of you</p>
-        <a class="btn btn-success" href="{% url 'view_all_mealplans_route' %}">Learn More</a>
-    </div>
+    <div id="home-jumbo-mealplan" class="jumbotron jumbotron-fluid mt-0 mb-0 parallax" style="background-image: url('{% static "image/mealplan3.jpg"%}')">
+        <div class="container">
+            <h1 class="display-4">Mealplan</h1>
+            <p class="lead">Feed your Body and your Soul</p>
+            <p class="lead">Take care of your body and it will take care of you</p>
+            <a class="btn btn-primary" href="{% url 'view_all_mealplans_route' %}">Learn More</a>
+        </div>
     </div>
 {%endblock%}

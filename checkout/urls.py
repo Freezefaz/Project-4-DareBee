@@ -9,5 +9,7 @@ urlpatterns = [
     path("cancelled", checkout.views.checkout_cancelled,
          name="checkout_cancelled_route"),
     path("payment_completed", checkout.views.payment_completed,
-         name="payment_completed_route")
+         name="payment_completed_route"),
+    path("view_purchases", checkout.views.view_purchases,
+         name="view_purchases_route")
 ]

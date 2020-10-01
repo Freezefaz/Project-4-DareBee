@@ -192,6 +192,16 @@ h1, h2, h3 {
 
 /* End of checkout template */
 
+/* For All Auth templates */
+
+.allauth-template {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+.allauth-template h1 {
+    font-family:'Roboto Condensed', sans-serif;
+}
+
 /* Footer */
 footer {
     padding: 10px;

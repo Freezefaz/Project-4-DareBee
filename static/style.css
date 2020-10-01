@@ -36,21 +36,23 @@ nav img {
 }
 /* end of base template */
 
+/* commom classes */
 h1, h2, h3 {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
 }
-
 .card {
     font-family: 'Roboto', sans-serif;
 }
-
 .card-header {
     font-family: 'Roboto Condensed', sans-serif;
 }
+.btn {
+    font-family: 'Roboto', sans-serif;
+}
+/* end of common classes */
 
 /* welcome template */
-
 #principles {
     /* background: white; */
     /* background: #9BA2A7; */

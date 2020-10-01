@@ -23,6 +23,7 @@ def create_exercise_review(request, exercise_id):
             review_model.customer = request.user
             review_model.save()
             print(review_model)
+             messages.success(request, "Your review have been created!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id": exercise_id}))
     else:
@@ -45,6 +46,7 @@ def update_exercise_review(request, exercisereview_id):
             form.save()
             # return redirect(reverse("exercise_details_route"))
             # need to use the relationship id to get the exercise_id
+            messages.success(request, "Your review have been updated!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id":
                                             exercise_review_to_update.exercise.id,}))
@@ -65,6 +67,7 @@ def delete_exercise_review(request, exercisereview_id):
     exercise_review_to_delete = get_object_or_404(
     ExerciseReview, pk=exercisereview_id)
     if request.method == "POST":
+        messages.success(request, "Review have been deleted!")
         exercise_review_to_delete.delete()
         # return redirect(reverse("exercise_details_route"))
         return redirect(reverse("exercise_details_route",
@@ -91,6 +94,7 @@ def create_mealplan_review(request, mealplan_id):
             review_model.mealplan = mealplan
             review_model.customer = request.user
             review_model.save()
+            messages.success(request, "Your review have been created!")
             return redirect(reverse("mealplan_details_route",
                                     kwargs={"mealplan_id": mealplan_id}))
     else:
@@ -110,6 +114,7 @@ def update_mealplan_review(request, mealplanreview_id):
                                   instance=mealplan_review_to_update)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your review have been updated!")
             return redirect(reverse("mealplan_details_route",
                                     kwargs={"mealplan_id":
                                             mealplan_review_to_update.mealplan.id}))
@@ -126,6 +131,7 @@ def delete_mealplan_review(request, mealplanreview_id):
     mealplan_review_to_delete = get_object_or_404(
         MealplanReview, pk=mealplanreview_id)
     if request.method == "POST":
+        messages.success(request, "Review have been deleted!")
         mealplan_review_to_delete.delete()
         return redirect(reverse("mealplan_details_route",
                                 kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id,

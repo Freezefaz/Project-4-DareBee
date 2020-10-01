@@ -97,7 +97,7 @@ def update_exercise_cart_quantity(request, exercise_id):
         # cart[exercise_id]["qty"] = request.POST["qty"]
         cart[exercise_id]["qty"] = quantity
         print(quantity)
-        messages.success(request, "Quantity has been updated")
+        messages.success(request, "Quantity has been updated!")
 
         # update the session
         request.session["shopping_cart"] = cart

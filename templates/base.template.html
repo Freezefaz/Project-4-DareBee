@@ -40,7 +40,26 @@
 							<a class="dropdown-item" href="{% url 'view_all_mealplans_route'%}">Mealplan</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_profile_route' %}">Create Profile</a>
+                    </li>
+                     <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_purchases_route' %}">View Purchases</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                     {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                        </li>
+                    {% endif %}
+                
+					<!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="{% url 'account_login' %}" id="register-DropdownMenuLink"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Login
@@ -54,9 +73,17 @@
                             <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
                           {% endif %}
 						</div>
-					</li>
+					</li> -->
                     {% if request.user.is_superuser %}
-					<li class="nav-item dropdown">
+
+                     <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">Admin Page</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{% url 'show_profiles_route' %}">All Profile</a>
+                    </li>
+
+					<!-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="{% url 'admin:index' %}" id="admin-DropdownMenuLink"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Staff
@@ -65,7 +92,7 @@
 							<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
                             <a class="dropdown-item" href="{% url 'show_profiles_route' %}">All Profile</a>
 						</div>
-					</li>
+					</li> -->
                     {% endif %}
 				</ul>
 			</div>

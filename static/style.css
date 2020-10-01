@@ -36,8 +36,6 @@ h1, h2, h3 {
 
 /* welcome template */
 
-
-
 #principles {
     /* background: white; */
     /* background: #9BA2A7; */
@@ -95,7 +93,6 @@ h1, h2, h3 {
   background-repeat: no-repeat;
   background-size: cover; */
 }
-
 
 /* end of welcome template */
 
@@ -180,15 +177,28 @@ h1, h2, h3 {
     background: #9BA2A7;
     /* background: #353A40; */
 }
+/* End of exercise/mealplan details template*/
 
+/* For checkout template */
+
+.table {
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.table h1 {
+     color: white;
+}
+
+/* End of checkout template */
 
 /* Footer */
 footer {
     padding: 10px;
     /* background: #9BA2A7; */
     background: white;
-     font-family: 'Roboto', sans-serif;
-     border-top: 5px solid black;
+    font-family: 'Roboto', sans-serif;
+    border-top: 5px solid black;
 }
 .footer-items a {
     padding: 10px;

@@ -1,0 +1,52 @@
+{%extends 'base.template.html'%}
+
+{%block title%}My Purchase{%endblock%}
+
+{%block content%}
+
+
+<div class="table table-responsive mt-5">
+    <table class="table table-striped mt-5 mb-5">
+    <h1>Exercise Purchase</h1>
+    <thead>
+        <tr>
+            <th scope="col">Exercise</th>
+            <th scope="col">Date</th>
+            <th scope="col">Price (SGD)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {%for each_exercise_purchase in exercise_purchase%}
+        <tr>
+            <td>{{each_exercise_purchase.exercise}} </td>
+            <td>{{each_exercise_purchase.purchase_date}}</td>
+            <td>{{each_exercise_purchase.price}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+<div class="table table-responsive mt-3">
+    <table class="table table-striped mt-5 mb-5">
+    <h1>Mealplan Purchase</h1>
+    <thead>
+        <tr>
+            <th scope="col">Mealplan</th>
+            <th scope="col">Date</th>
+            <th scope="col">Price (SGD)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {%for each_mealplan_purchase in mealplan_purchase%}
+        <tr>
+            <td>{{each_mealplan_purchase.mealplan}} </td>
+            <td>{{each_mealplan_purchase.purchase_date}}</td>
+            <td>{{each_mealplan_purchase.price}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}

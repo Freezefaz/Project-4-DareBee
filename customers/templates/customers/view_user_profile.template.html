@@ -4,18 +4,24 @@
 
 {%block content%}
 
-<div class="row d-flex justify-content-center">
-    <div class=" border-dark ">
-        <div class="header">
-            <h5>Name: {{profile.first_name}} {{profile.last_name}}</h5>
-        </div>
-        <div class="body d-flex flex-column">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Date Of Birth:</strong> {{profile.dob}}</li>
-            <li class="list-group-item"><strong>Height:</strong> {{profile.height}}</li>
-            <li class="list-group-item"><strong>Weight:</strong> {{profile.weight}}</li>
-            <li class="list-group-item"><strong>Goals:</strong> {{profile.goals}}</li>
-        </ul>
+<div class="container mb-5">
+        <div class="pt-5 ">
+            <div class="profile">
+                <div id="profile">
+                    <h1 class="display">Your Profile</h1>
+                </div>
+                <div>   
+                    <h3 class="profile"> <b>Name:</b> {{profile.first_name}} {{profile.last_name}}</h3>
+                    <ul class="list-unstyled profile" id="list-details">
+                        <li class="mb-2 ml-5"><b>Email:</b>   {{profile.user.email}}</li>
+                        <li class="mb-2 ml-5"><b>Date Of Birth::</b> {{profile.dob}}  </li>
+                        <li class="mb-2 ml-5"><b>Height:</b> {{profile.height}}  </li>
+                        <li class="mb-2 ml-5"><b>Weight:</b> {{profile.weight}} </li>
+                        <li class="mb-2 ml-5"><b>Goals:</b> {{profile.goals}} </li>
+                    </ul>
+                    <a href="{% url 'update_profile_route'%}" class="btn btn-danger" id="profile-button">Edit Profile</a>
+                </div>
+            </div>
         </div>
     </div>
 

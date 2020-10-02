@@ -39,8 +39,9 @@ def create_profile(request):
         })
 
 
-def update_profile(request, profile_id):
-    profile_to_update = get_object_or_404(Profile, pk=profile_id)
+# def update_profile(request, profile_id):
+def update_profile(request):
+    profile_to_update = get_object_or_404(Profile, customer=request.user)
     # if update form is submitted
     if request.method == "POST":
         # create form and fill in data to existing form
@@ -48,7 +49,7 @@ def update_profile(request, profile_id):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, "Your profile have been updated!")
-            return redirect(reverse(show_profiles))
+            return redirect(reverse(view_user_profile))
     else:
         # create form and fill it with data
         profile_form = ProfileForm(instance=profile_to_update)

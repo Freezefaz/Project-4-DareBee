@@ -203,11 +203,13 @@ h1, h2, h3 {
 }
 /* End of exercise/mealplan details template*/
 
-/* For cart Template */
+/* For customers Template */
 
+.profile {
+    color:white;
+}
 
-
-/* End of cart template */
+/* End of customers template */
 
 
 /* For checkout template */

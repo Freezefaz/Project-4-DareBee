@@ -1,0 +1,22 @@
+{%extends 'base.template.html'%}
+
+{%block title%} Your Profile {%endblock%}
+
+{%block content%}
+
+<div class="row d-flex justify-content-center">
+    <div class=" border-dark ">
+        <div class="header">
+            <h5>Name: {{profile.first_name}} {{profile.last_name}}</h5>
+        </div>
+        <div class="body d-flex flex-column">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Date Of Birth:</strong> {{profile.dob}}</li>
+            <li class="list-group-item"><strong>Height:</strong> {{profile.height}}</li>
+            <li class="list-group-item"><strong>Weight:</strong> {{profile.weight}}</li>
+            <li class="list-group-item"><strong>Goals:</strong> {{profile.goals}}</li>
+        </ul>
+        </div>
+    </div>
+
+{%endblock%}

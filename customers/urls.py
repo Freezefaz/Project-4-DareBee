@@ -10,6 +10,8 @@ urlpatterns = [
          name="update_profile_route"),
     path("delete/<profile_id>", customers.views.delete_profile,
          name="delete_profile_route"),
+    path("view/", customers.views.view_user_profile,
+         name="view_user_profile_route"),
 ]
 
 

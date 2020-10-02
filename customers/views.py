@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from .models import Customer, Profile
 from django.contrib.auth.models import User
 from .forms import ProfileForm
+from django.contrib import messages
 import products.views
 # Create your views here.
 
@@ -25,7 +26,7 @@ def create_profile(request):
             profile_model.customer = request.user
             profile_model.save()
             messages.success(request, "Your profile have been created!")
-            return redirect(reverse(show_profiles))
+            return redirect(reverse(view_user_profile))
         else:
             # if does not have any valid values and re-render the form
             return render(request, "customers/create_profile.template.html", {
@@ -68,13 +69,9 @@ def delete_profile(request, profile_id):
             "profile": profile_to_delete
         })
 
-    # <h1>All Profiles</h1>
-    #     <ul>
-    #         {% for each_profile in all_profiles %}
-    #         <li>
-    #             {{each_profile.first_name}} {{each_profile.last_name}}
-    #             <a href="{% url 'update_profile_route' profile_id=each_profile.id%}">Edit</a>
-    #             <a href="{% url 'delete_profile_route' profile_id=each_profile.id%}">Delete</a>
-    #         </li>
-    #     </ul>
-        # {% endfor %}
+
+def view_user_profile(request):
+    user_profile = get_object_or_404(Profile, customer=request.user)
+    return render(request, "customers/view_user_profile.template.html", {
+        "profile": user_profile
+    })

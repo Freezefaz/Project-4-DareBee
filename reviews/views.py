@@ -23,7 +23,7 @@ def create_exercise_review(request, exercise_id):
             review_model.customer = request.user
             review_model.save()
             print(review_model)
-             messages.success(request, "Your review have been created!")
+            messages.success(request, "Your review have been created!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id": exercise_id}))
     else:

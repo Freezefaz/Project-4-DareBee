@@ -5,28 +5,19 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
-# show product pages
-
-
 def index(request):
-    # return HttpResponse("Products")
     return render(request, "products/index_product.template.html")
 
-# Start of Exercise
-# show only all exercise page
-
-
 def show_exercise(request):
-    # return HttpResponse("Exercise")
+    # search function
     all_exercises = Exercise.objects.all()
     queries = ~Q(pk__in=[])
 
     if request.GET:
-        # get books that have the search terms in the title
+        # get exercise that have the search terms in the title
         if "title" in request.GET and request.GET["title"]:
             queries = queries & Q(title__icontains=request.GET["title"])
 
@@ -43,8 +34,6 @@ def show_exercise(request):
         "all_exercises": all_exercises,
         "search_form": search_form
     })
-
-# create exercise
 
 @login_required
 def create_exercise(request):
@@ -66,13 +55,11 @@ def create_exercise(request):
         return render(request, "products/create_exercise.template.html", {
             "form": create_form
         })
-    # return HttpResponse("Create Exercise")
 
 
-@staff_member_required
+@login_required
 def update_exercise(request, exercise_id):
-    # return HttpResponse("Update Exercise")
-    # retrieve book that we are updating
+    # retrieve exercise that we are updating
     exercise_to_update = get_object_or_404(Exercise, pk=exercise_id)
     # if update form is submitted
     if request.method == "POST":
@@ -89,8 +76,9 @@ def update_exercise(request, exercise_id):
             "form": exercise_form
         })
 
+@login_required
 def delete_exercise(request, exercise_id):
-    # return HttpResponse("Delete Exercise")
+    # retrieve exercise that we are deleting
     exercise_to_delete = get_object_or_404(Exercise, pk=exercise_id)
     if request.method == "POST":
         messages.success(request, f"{exercise_to_delete.title} has been deleted!")
@@ -101,8 +89,8 @@ def delete_exercise(request, exercise_id):
             "exercise": exercise_to_delete
         })
 
-
 def view_exercise_details(request, exercise_id):
+    # show individual exercise details
     exercise_model = get_object_or_404(Exercise, pk=exercise_id)
     return render(request, 'products/exercise_details.template.html', {
         "exercise": exercise_model
@@ -112,14 +100,15 @@ def view_exercise_details(request, exercise_id):
 
 
 # Start of Mealplans
-# show all mealplans
+
+
 def show_mealplans(request):
-    # return HttpResponse("Mealplans")
+    # search for mealplans
     all_mealplans = Mealplan.objects.all()
     queries = ~Q(pk__in=[])
 
     if request.GET:
-        # get books that have the search terms in the title
+        # get mealplans that have the search terms in the title
         if "title" in request.GET and request.GET["title"]:
             queries = queries & Q(title__icontains=request.GET["title"])
 
@@ -138,11 +127,8 @@ def show_mealplans(request):
     })
 
 
-# create mealplan
-
-
+@login_required
 def create_mealplan(request):
-    # return HttpResponse("Create Mealplan")
     if request.method == "POST":
         create_form = MealplanForm(request.POST)
         # check if form have valid values
@@ -161,11 +147,8 @@ def create_mealplan(request):
             "form": create_form
         })
 
-# update mealplan
-
-
+@login_required
 def update_mealplan(request, mealplan_id):
-    # return HttpResponse("Update Mealplan")
     mealplan_to_update = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
         mealplan_form = MealplanForm(request.POST, instance=mealplan_to_update)
@@ -183,9 +166,8 @@ def update_mealplan(request, mealplan_id):
             "form": mealplan_form
         })
 
-
+@login_required
 def delete_mealplan(request, mealplan_id):
-    # return HttpResponse("Delete")
     mealplan_to_delete = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
         messages.success(request, f"{mealplan_to_delete.title} has been deleted!")
@@ -198,6 +180,7 @@ def delete_mealplan(request, mealplan_id):
 
 
 def view_mealplan_details(request, mealplan_id):
+    # view individual mealplan details
     mealplan_model = get_object_or_404(Mealplan, pk=mealplan_id)
     return render(request, 'products/mealplan_details.template.html', {
         "mealplan": mealplan_model

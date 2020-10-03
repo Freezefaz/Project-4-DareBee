@@ -59,17 +59,6 @@ class ExerciseTestView(TestCase):
         self.assertTemplateUsed(
             response, "products/delete_exercise.template.html")
 
-    def test_exercise_details_page(self):
-        exercise = Exercise(title="Foundation", description="Easy",
-                            price="20", exercise_type=self.exercise_type)
-        exercise.save()
-        response = self.client.get(f"/products/exercise/details/{exercise.id}")
-        # response = self.client.get("/products/exercise/details/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "products/exercise_details.template.html")
-
-
 class MealplansTestView(TestCase):
     def test_mealplans_page(self):
         # simulate going to products page
@@ -109,12 +98,3 @@ class MealplansTestView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, "products/delete_mealplan.template.html")
-
-    def test_mealplan_details_page(self):
-        mealplan = Mealplan(title="Muscle", description="Tough",
-                            price="20", mealplan_type=self.mealplan_type)
-        mealplan.save()
-        response = self.client.get(f"/products/mealplans/details/{mealplan.id}")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, "products/mealplan_details.template.html")

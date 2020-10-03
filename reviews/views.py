@@ -3,6 +3,7 @@ from .models import ExerciseReview, MealplanReview
 from .forms import ExerciseReviewForm, MealplanReviewForm
 from products.models import Exercise, Mealplan
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ def show_exercise_reviews(request):
     })
 
 
+@login_required
 def create_exercise_review(request, exercise_id):
     exercise = get_object_or_404(Exercise, pk=exercise_id)
     if request.method == "POST":
@@ -36,9 +38,8 @@ def create_exercise_review(request, exercise_id):
                           "exercise": exercise
                       })
 
-# def update_exercise_review(request, exercise_id, exercisereview_id):
+
 def update_exercise_review(request, exercisereview_id):
-    # exercise = get_object_or_404(Exercise, pk=exercise_id)
     exercise_review_to_update = get_object_or_404(
         ExerciseReview, pk=exercisereview_id)
     if request.method == "POST":
@@ -46,14 +47,10 @@ def update_exercise_review(request, exercisereview_id):
                                   instance=exercise_review_to_update)
         if form.is_valid():
             form.save()
-            # return redirect(reverse("exercise_details_route"))
-            # need to use the relationship id to get the exercise_id
             messages.success(request, "Your review have been updated!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id":
-                                            exercise_review_to_update.exercise.id,}))
-                                            # "exercise_review_id": exercise_review_to_update.id}))
-            # return redirect(reverse("exercise_details_route", kwargs={"exercise_review_id": exercise_review_id}))
+                                            exercise_review_to_update.exercise.id, }))
     else:
         form = ExerciseReviewForm(instance=exercise_review_to_update)
         return render(request,
@@ -63,30 +60,24 @@ def update_exercise_review(request, exercisereview_id):
                       })
 
 
-# def delete_exercise_review(request, exercise_id, exercisereview_id):
 def delete_exercise_review(request, exercisereview_id):
-    # exercise = get_object_or_404(Exercise, pk=exercise_id)
     exercise_review_to_delete = get_object_or_404(
-    ExerciseReview, pk=exercisereview_id)
+        ExerciseReview, pk=exercisereview_id)
     if request.method == "POST":
         messages.success(request, "Review have been deleted!")
         exercise_review_to_delete.delete()
-        # return redirect(reverse("exercise_details_route"))
         return redirect(reverse("exercise_details_route",
                                 kwargs={
-                                    # "exercise_id": exercise_id,
                                     "exercise_id": exercisereview_id.exercise.id,
                                     "exercisereview_id": exercisereview_id}))
     else:
         return render(request, "reviews/delete_exercise_review.template.html",
                       {
                           "exercisereview": exercise_review_to_delete,
-                        #   "exercise":  exercise_review_to_delete.exercise
                       })
 
-# Mealplan
 
-
+@login_required
 def create_mealplan_review(request, mealplan_id):
     mealplan = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
@@ -137,7 +128,7 @@ def delete_mealplan_review(request, mealplanreview_id):
         mealplan_review_to_delete.delete()
         return redirect(reverse("mealplan_details_route",
                                 kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id,
-                                 "mealplanreview_id":mealplanreview_id}))
+                                        "mealplanreview_id": mealplanreview_id}))
     else:
         return render(request, "reviews/delete_mealplan_review.template.html",
                       {

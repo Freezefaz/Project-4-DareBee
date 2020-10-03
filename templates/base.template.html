@@ -24,14 +24,8 @@
   </button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav mx-auto">
-					<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="about-us-DropdownMenuLink"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							About Us
-						</a>
-					</li> -->
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="{% url 'view_all_products_route'%}" id="products-DropdownMenuLink"
+						<a class="nav-link dropdown-toggle" href="#" id="products-DropdownMenuLink"
 							style="color: #d6001c" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Products
 						</a>
@@ -61,37 +55,10 @@
                             <a class="nav-link" style="color: #d6001c" href="{% url 'account_login' %}">Sign In</a>
                         </li>
                     {% endif %}
-                
-					<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="{% url 'account_login' %}" id="register-DropdownMenuLink"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Login
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                         {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                            <a class="nav-link" href="{% url 'create_profile_route' %}">Create Profile</a>
-                         {% else %}
-							<a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
-                            <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
-                          {% endif %}
-						</div>
-					</li> -->
                     {% if request.user.is_superuser %}
                     <li class="nav-item">
                             <a class="nav-link" style="color: #d6001c" href="{% url 'show_profiles_route' %}">All Profiles</a>
                     </li>
-
-					<!-- <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="{% url 'admin:index' %}" id="admin-DropdownMenuLink"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Staff
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
-                            <a class="dropdown-item" href="{% url 'show_profiles_route' %}">All Profile</a>
-						</div>
-					</li> -->
                     {% endif %}
 				</ul>
 			</div>
@@ -117,10 +84,6 @@
    
 
     <div class="container">
-        <!-- <div class="header">
-            <a href="{% url 'view_cart_route' %}"> Shopping Cart ({{number_of_items}})</a>
-        </div> -->
-
                 {%block content%}{%endblock%}
     </div>
 

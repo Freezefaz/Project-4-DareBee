@@ -4,6 +4,7 @@ from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required, staff_member_required
 
 # Create your views here.
 
@@ -44,7 +45,7 @@ def show_exercise(request):
 
 # create exercise
 
-
+@login_required
 def create_exercise(request):
     if request.method == "POST":
         create_form = ExerciseForm(request.POST)
@@ -66,7 +67,7 @@ def create_exercise(request):
         })
     # return HttpResponse("Create Exercise")
 
-
+@staff_member_required
 def update_exercise(request, exercise_id):
     # return HttpResponse("Update Exercise")
     # retrieve book that we are updating

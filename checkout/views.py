@@ -1,26 +1,26 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.conf import settings
-import stripe
 from products.models import Exercise, Mealplan
 from customers.models import Customer
-from django.contrib.auth.models import User
 from .models import Exercise_Purchase, Mealplan_Purchase
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
+import stripe
 import json
 from uuid import UUID
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+#  create a unique id for each exercise in array
 class UUIDEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, UUID):
             return obj.hex
         return json.JSONEncoder.default(self, obj)
 
-
+@login_required
 def checkout(request):
     # tell stripe what api key is
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -50,7 +50,6 @@ def checkout(request):
         exercise_line_items.append(exercise_item)
         all_exercise_ids.append({
             "exercise_id": exercise_model.id,
-            # "qty": item["qty"]
         })
 
     # go through each line in cart
@@ -65,11 +64,9 @@ def checkout(request):
             "quantity": 1,
             "currency": "sgd",
         }
-
         mealplan_line_items.append(mealplan_item)
         all_mealplan_ids.append({
             "mealplan_id": mealplan_model.id,
-            # "qty": item["qty"]
         })
 
     # get current website
@@ -93,7 +90,6 @@ def checkout(request):
             "all_mealplan_ids": json.dumps(all_mealplan_ids)
         }
     )
-    print(session)
     # render the template which will redirect to stripe
     return render(request, "checkout/checkout.template.html", {
         'session_id': session.id,
@@ -110,7 +106,7 @@ def checkout_success(request):
 
 
 def checkout_cancelled(request):
-    messages.error(request, "Error in Checkout!")
+    messages.success(request, "Error in Checkout!")
     return redirect(reverse('home_route'))
 
 
@@ -123,7 +119,6 @@ def payment_completed(request):
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     # to define event in try
     event = None
-    print("hi2")
     # remember to get the endpoint secret
     # get the secret signature and paste on the settings.py
     # also on .env
@@ -146,19 +141,12 @@ def payment_completed(request):
 
 
 def handle_payment(session):
-    # print(session)
+    # get id from meta data to find the id 
     customer = get_object_or_404(User, pk=session["client_reference_id"])
-    print(customer)
-
-    # change the metadata from string back to array
-
-    # all_exercise_ids = session["metadata"]["all_exercise_ids"].split(",")
     all_exercise_ids = json.loads(session["metadata"]["all_exercise_ids"])
     for exercise in all_exercise_ids:
         exercise_model = get_object_or_404(
             Exercise, pk=exercise["exercise_id"])
-        print(exercise_model)
-
         # create the purchase model
         exercise_purchase = Exercise_Purchase()
         exercise_purchase.exercise = exercise_model
@@ -170,7 +158,6 @@ def handle_payment(session):
     for mealplan in all_mealplan_ids:
         mealplan_model = get_object_or_404(
             Mealplan, pk=mealplan["mealplan_id"])
-        print("hi3")
         # create the purchase model
         mealplan_purchase = Mealplan_Purchase()
         mealplan_purchase.mealplan = mealplan_model
@@ -178,8 +165,8 @@ def handle_payment(session):
         mealplan_purchase.price = mealplan_model.price
         mealplan_purchase.save()
 
-
 def view_purchases(request):
+    #  get all purchase from purchase model to display on purchase template
     exercise_purchase = Exercise_Purchase.objects.filter(customer=request.user)
     mealplan_purchase = Mealplan_Purchase.objects.filter(customer=request.user)
     return render(request, "checkout/user_purchases.template.html", {

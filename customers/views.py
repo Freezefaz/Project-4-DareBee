@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from .models import Customer, Profile
-from django.contrib.auth.models import User
 from .forms import ProfileForm
-from django.contrib import messages
 import products.views
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required

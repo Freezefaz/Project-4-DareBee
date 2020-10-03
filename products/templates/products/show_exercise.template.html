@@ -8,7 +8,7 @@
 {% block content %}
 
     {% if request.user.is_superuser %}
-        <a class="btn btn-primary" href="{% url 'create_exercise_route' %}">Create Exercise</a>
+        <a class="btn btn-primary mt-3 mb-3" href="{% url 'create_exercise_route' %}">Create Exercise</a>
     {%endif%}
 
         <div id="exercise-jumbo" class="products-jumbo jumbotron jumbotron-fluid" style="background-image: url('{% static "image/exercise3.jpg"%}');">

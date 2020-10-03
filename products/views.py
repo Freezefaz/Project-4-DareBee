@@ -4,7 +4,8 @@ from reviews.models import ExerciseReview
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required, staff_member_required
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
@@ -67,6 +68,7 @@ def create_exercise(request):
         })
     # return HttpResponse("Create Exercise")
 
+
 @staff_member_required
 def update_exercise(request, exercise_id):
     # return HttpResponse("Update Exercise")
@@ -86,7 +88,6 @@ def update_exercise(request, exercise_id):
         return render(request, "products/update_exercise.template.html", {
             "form": exercise_form
         })
-
 
 def delete_exercise(request, exercise_id):
     # return HttpResponse("Delete Exercise")

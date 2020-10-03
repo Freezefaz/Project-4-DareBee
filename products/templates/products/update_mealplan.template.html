@@ -9,7 +9,7 @@
     {% csrf_token %}
 	{{form|crispy}}
     <input class="btn btn-success" type="submit"  value="Update"/>
-    <a class="btn btn-danger" href="{% url 'view_all_mealplan_route' %}">Cancel</a>
+    <a class="btn btn-danger" href="{% url 'view_all_mealplans_route' %}">Cancel</a>
 </form>
 
 {%endblock%}

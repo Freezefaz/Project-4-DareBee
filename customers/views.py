@@ -6,8 +6,9 @@ from django.contrib import messages
 import products.views
 # Create your views here.
 
-
+@login_required
 def show_profiles(request):
+    # get all customers and profiles to show on 1 page
     all_customers = User.objects.all()
     all_profiles = Profile.objects.all()
     return render(request, "customers/show_profiles.template.html", {
@@ -15,9 +16,8 @@ def show_profiles(request):
         "all_customers": all_customers
     })
 
-
+@login_required
 def create_profile(request):
-    # return HttpResponse("Your Profile")
     if request.method == "POST":
         create_form = ProfileForm(request.POST)
         # check if created form have valid values
@@ -38,9 +38,9 @@ def create_profile(request):
             "form": create_form
         })
 
-
-# def update_profile(request, profile_id):
+@login_required
 def update_profile(request):
+    # if customer is the requsted user he can update his own profile
     profile_to_update = get_object_or_404(Profile, customer=request.user)
     # if update form is submitted
     if request.method == "POST":
@@ -57,9 +57,9 @@ def update_profile(request):
             "form": profile_form
         })
 
-
+@login_required
 def delete_profile(request, profile_id):
-    # return HttpResponse("Delete Exercise")
+    # delete profile base on profile
     profile_to_delete = get_object_or_404(Profile, pk=profile_id)
     if request.method == "POST":
         messages.success(request, "Profile have been deleted!")
@@ -70,8 +70,9 @@ def delete_profile(request, profile_id):
             "profile": profile_to_delete
         })
 
-
+@login_required
 def view_user_profile(request):
+    # only user can view their own profile
     user_profile = get_object_or_404(Profile, customer=request.user)
     return render(request, "customers/view_user_profile.template.html", {
         "profile": user_profile

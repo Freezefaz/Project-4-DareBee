@@ -27,7 +27,7 @@ def create_exercise_review(request, exercise_id):
             review_model.customer = request.user
             review_model.save()
             print(review_model)
-            messages.success(request, "Your review have been created!")
+            messages.success(request, "Your review has been created!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id": exercise_id}))
     else:
@@ -47,7 +47,7 @@ def update_exercise_review(request, exercisereview_id):
                                   instance=exercise_review_to_update)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your review have been updated!")
+            messages.success(request, "Your review has been updated!")
             return redirect(reverse("exercise_details_route",
                                     kwargs={"exercise_id":
                                             exercise_review_to_update.exercise.id, }))
@@ -87,7 +87,7 @@ def create_mealplan_review(request, mealplan_id):
             review_model.mealplan = mealplan
             review_model.customer = request.user
             review_model.save()
-            messages.success(request, "Your review have been created!")
+            messages.success(request, "Your review has been created!")
             return redirect(reverse("mealplan_details_route",
                                     kwargs={"mealplan_id": mealplan_id}))
     else:
@@ -107,7 +107,7 @@ def update_mealplan_review(request, mealplanreview_id):
                                   instance=mealplan_review_to_update)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your review have been updated!")
+            messages.success(request, "Your review has been updated!")
             return redirect(reverse("mealplan_details_route",
                                     kwargs={"mealplan_id":
                                             mealplan_review_to_update.mealplan.id}))

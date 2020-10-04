@@ -37,7 +37,7 @@
             <h5><a href="{% url 'exercise_details_route' exercise_id=each_exercise.id %}">{{each_exercise.title}}</a></h5>
             <p>Click here for reviews</p>
             {% if request.user.is_superuser %}
-                <a class="btn btn-primary" href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Edit</a>
+                <a class="btn btn-primary" href="{% url 'update_exercise_route' exercise_id=each_exercise.id%}">Update</a>
                 <a class="btn btn-danger" href="{% url 'delete_exercise_route' exercise_id=each_exercise.id%}">Delete</a>
             {%endif%}
         </div>

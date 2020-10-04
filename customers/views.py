@@ -26,7 +26,7 @@ def create_profile(request):
             profile_model = create_form.save(commit=False)
             profile_model.customer = request.user
             profile_model.save()
-            messages.success(request, "Your profile have been created!")
+            messages.success(request, "Your profile has been created!")
             return redirect(reverse(view_user_profile))
         else:
             # if does not have any valid values and re-render the form
@@ -49,7 +49,7 @@ def update_profile(request):
         profile_form = ProfileForm(request.POST, instance=profile_to_update)
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request, "Your profile have been updated!")
+            messages.success(request, "Your profile has been updated!")
             return redirect(reverse(view_user_profile))
     else:
         # create form and fill it with data
@@ -63,7 +63,7 @@ def delete_profile(request, profile_id):
     # delete profile base on profile
     profile_to_delete = get_object_or_404(Profile, pk=profile_id)
     if request.method == "POST":
-        messages.success(request, "Profile have been deleted!")
+        messages.success(request, "Profile has been deleted!")
         profile_to_delete.delete()
         return redirect(show_profiles)
     else:

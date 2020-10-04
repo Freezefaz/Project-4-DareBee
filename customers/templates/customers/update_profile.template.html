@@ -4,13 +4,13 @@
 {%block title%} Update Profile {%endblock%}
 
 {%block content%}
-<h1>Update Profile</h1>
 
 <form method="POST" enctype="multipart/form-data" class="m-3">
+    <h1>Update Profile</h1>
 	{% csrf_token %}
 	{{form|crispy}}
     <input class="btn btn-success" type="submit"  value="Update"/>
-    <a class="btn btn-danger" href="{% url 'show_profiles_route' %}">Cancel</a>
+    <a class="btn btn-danger" href="{% url 'view_user_profile_route' %}">Cancel</a>
     </form>
 
 {%endblock%}

@@ -96,7 +96,7 @@ def checkout(request):
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
-
+@login_required
 def checkout_success(request):
     # empty the shopping cart
     request.session['shopping_cart'] = {}
@@ -104,7 +104,7 @@ def checkout_success(request):
     messages.success(request, "Checkout Success!")
     return redirect(reverse('home_route'))
 
-
+@login_required
 def checkout_cancelled(request):
     messages.success(request, "Error in Checkout!")
     return redirect(reverse('home_route'))

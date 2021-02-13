@@ -1,10 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from products.models import Exercise, Mealplan
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required
 def add_to_exercise_cart(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     # check if exercise is not in the cart, then add
@@ -26,7 +26,7 @@ def add_to_exercise_cart(request, exercise_id):
         request.session["shopping_cart"] = cart
         return redirect(reverse("view_all_exercise_route"))
 
-
+@login_required
 def add_to_mealplan_cart(request, mealplan_id):
     # check if mealplan is not in the cart, then add
     cart = request.session.get("mealplan_shopping_cart", {})
@@ -48,7 +48,7 @@ def add_to_mealplan_cart(request, mealplan_id):
                          f"{mealplan.title} already added to your cart!")
         return redirect(reverse("view_all_mealplans_route"))
 
-
+@login_required
 def view_cart(request):
     # retrieve the cart
     exercise_cart = request.session.get("shopping_cart", {})
@@ -66,7 +66,7 @@ def view_cart(request):
         "total": f"{total:.2f}"
     })
 
-
+@login_required
 def remove_from_exercise_cart(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     # if exercise is in cart
@@ -78,7 +78,7 @@ def remove_from_exercise_cart(request, exercise_id):
         messages.success(request, "Exercise removed from cart successfully!")
         return redirect(reverse("view_all_exercise_route"))
 
-
+@login_required
 def remove_from_mealplan_cart(request, mealplan_id):
     cart = request.session.get("mealplan_shopping_cart", {})
     # if mealplan is in cart
@@ -90,7 +90,7 @@ def remove_from_mealplan_cart(request, mealplan_id):
         messages.success(request, "Mealplan removed from cart successfully!")
         return redirect(reverse("view_all_mealplans_route"))
 
-
+@login_required
 def update_exercise_cart_quantity(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     quantity = request.POST["qty"]

@@ -38,6 +38,7 @@ def create_exercise_review(request, exercise_id):
                           "exercise": exercise
                       })
 
+
 @login_required
 def create_mealplan_review(request, mealplan_id):
     mealplan = get_object_or_404(Mealplan, pk=mealplan_id)
@@ -57,4 +58,5 @@ def create_mealplan_review(request, mealplan_id):
                       "reviews/create_mealplan_review.template.html", {
                           "form": form,
                           "mealplan": mealplan
+
                       })

@@ -28,6 +28,7 @@ def checkout(request):
     # tell stripe what api key is
     stripe.api_key = settings.STRIPE_SECRET_KEY
     # retrieve my shopping cart
+
     exercise_cart = request.session.get("shopping_cart", {})
     mealplan_cart = request.session.get("mealplan_shopping_cart", {})
 
@@ -37,67 +38,70 @@ def checkout(request):
     mealplan_line_items = []
     all_mealplan_ids = []
 
-    # go through each line in cart
-    for key, exercise_item in exercise_cart.items():
-        # retrieve exercise by id
-        exercise_model = get_object_or_404(Exercise, pk=exercise_item["id"])
+    if exercise_cart is not None or mealplan_cart is not None:
+        # go through each line in cart
+        for key, exercise_item in exercise_cart.items():
+            # retrieve exercise by id
+            exercise_model = get_object_or_404(Exercise, pk=exercise_item["id"])
 
-        # create line item for stripe
-        exercise_item = {
-            "name": exercise_model.title,
-            "amount": int(exercise_model.price * 100),
-            "quantity": exercise_item["qty"],
-            "currency": "sgd",
-        }
+            # create line item for stripe
+            exercise_item = {
+                "name": exercise_model.title,
+                "amount": int(exercise_model.price * 100),
+                "quantity": exercise_item["qty"],
+                "currency": "sgd",
+            }
 
-        exercise_line_items.append(exercise_item)
-        all_exercise_ids.append({
-            "exercise_id": exercise_model.id,
+            exercise_line_items.append(exercise_item)
+            all_exercise_ids.append({
+                "exercise_id": exercise_model.id,
+            })
+
+        # go through each line in cart
+        for key, mealplan_item in mealplan_cart.items():
+            # retrieve exercise by id
+            mealplan_model = get_object_or_404(Mealplan, pk=mealplan_item["id"])
+
+            # create line item for stripe
+            mealplan_item = {
+                "name": mealplan_model.title,
+                "amount": int(mealplan_model.price * 100),
+                "quantity": 1,
+                "currency": "sgd",
+            }
+            mealplan_line_items.append(mealplan_item)
+            all_mealplan_ids.append({
+                "mealplan_id": mealplan_model.id,
+            })
+
+        # get current website
+        current_site = Site.objects.get_current()
+        # get the domain name
+        domain = current_site.domain
+
+        all_line_items = exercise_line_items + mealplan_line_items
+        # create a payment session for current transaction
+        session = stripe.checkout.Session.create(
+            # take credit cards
+            payment_method_types=["card"],
+            line_items=all_line_items,
+            # customer id
+            client_reference_id=request.user.id,
+            mode='payment',
+            success_url=domain + reverse("checkout_success_route"),
+            cancel_url=domain + reverse("checkout_cancelled_route"),
+            metadata={
+                "all_exercise_ids": json.dumps(all_exercise_ids, cls=UUIDEncoder),
+                "all_mealplan_ids": json.dumps(all_mealplan_ids)
+            }
+        )
+        # render the template which will redirect to stripe
+        return render(request, "checkout/checkout.template.html", {
+            'session_id': session.id,
+            'public_key': settings.STRIPE_PUBLISHABLE_KEY
         })
-
-    # go through each line in cart
-    for key, mealplan_item in mealplan_cart.items():
-        # retrieve exercise by id
-        mealplan_model = get_object_or_404(Mealplan, pk=mealplan_item["id"])
-
-        # create line item for stripe
-        mealplan_item = {
-            "name": mealplan_model.title,
-            "amount": int(mealplan_model.price * 100),
-            "quantity": 1,
-            "currency": "sgd",
-        }
-        mealplan_line_items.append(mealplan_item)
-        all_mealplan_ids.append({
-            "mealplan_id": mealplan_model.id,
-        })
-
-    # get current website
-    current_site = Site.objects.get_current()
-    # get the domain name
-    domain = current_site.domain
-
-    all_line_items = exercise_line_items + mealplan_line_items
-    # create a payment session for current transaction
-    session = stripe.checkout.Session.create(
-        # take credit cards
-        payment_method_types=["card"],
-        line_items=all_line_items,
-        # customer id
-        client_reference_id=request.user.id,
-        mode='payment',
-        success_url=domain + reverse("checkout_success_route"),
-        cancel_url=domain + reverse("checkout_cancelled_route"),
-        metadata={
-            "all_exercise_ids": json.dumps(all_exercise_ids, cls=UUIDEncoder),
-            "all_mealplan_ids": json.dumps(all_mealplan_ids)
-        }
-    )
-    # render the template which will redirect to stripe
-    return render(request, "checkout/checkout.template.html", {
-        'session_id': session.id,
-        'public_key': settings.STRIPE_PUBLISHABLE_KEY
-    })
+    else:
+        return redirect(reverse("view_cart_route"))
 
 
 @login_required

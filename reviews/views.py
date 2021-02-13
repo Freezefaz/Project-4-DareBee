@@ -38,45 +38,6 @@ def create_exercise_review(request, exercise_id):
                           "exercise": exercise
                       })
 
-
-def update_exercise_review(request, exercisereview_id):
-    exercise_review_to_update = get_object_or_404(
-        ExerciseReview, pk=exercisereview_id)
-    if request.method == "POST":
-        form = ExerciseReviewForm(request.POST,
-                                  instance=exercise_review_to_update)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your review has been updated!")
-            return redirect(reverse("exercise_details_route",
-                                    kwargs={"exercise_id":
-                                            exercise_review_to_update.exercise.id, }))
-    else:
-        form = ExerciseReviewForm(instance=exercise_review_to_update)
-        return render(request,
-                      'reviews/update_exercise_review.template.html', {
-                          "form": form,
-                          "exercise": exercise_review_to_update
-                      })
-
-
-def delete_exercise_review(request, exercisereview_id):
-    exercise_review_to_delete = get_object_or_404(
-        ExerciseReview, pk=exercisereview_id)
-    if request.method == "POST":
-        messages.success(request, "Review have been deleted!")
-        exercise_review_to_delete.delete()
-        return redirect(reverse("exercise_details_route",
-                                kwargs={
-                                    "exercise_id": exercisereview_id.exercise.id,
-                                    "exercisereview_id": exercisereview_id}))
-    else:
-        return render(request, "reviews/delete_exercise_review.template.html",
-                      {
-                          "exercisereview": exercise_review_to_delete,
-                      })
-
-
 @login_required
 def create_mealplan_review(request, mealplan_id):
     mealplan = get_object_or_404(Mealplan, pk=mealplan_id)
@@ -96,41 +57,4 @@ def create_mealplan_review(request, mealplan_id):
                       "reviews/create_mealplan_review.template.html", {
                           "form": form,
                           "mealplan": mealplan
-                      })
-
-
-def update_mealplan_review(request, mealplanreview_id):
-    mealplan_review_to_update = get_object_or_404(
-        MealplanReview, pk=mealplanreview_id)
-    if request.method == "POST":
-        form = MealplanReviewForm(request.POST,
-                                  instance=mealplan_review_to_update)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your review has been updated!")
-            return redirect(reverse("mealplan_details_route",
-                                    kwargs={"mealplan_id":
-                                            mealplan_review_to_update.mealplan.id}))
-    else:
-        form = MealplanReviewForm(instance=mealplan_review_to_update)
-        return render(request,
-                      'reviews/update_mealplan_review.template.html', {
-                          "form": form,
-                          "mealplan": mealplan_review_to_update
-                      })
-
-
-def delete_mealplan_review(request, mealplanreview_id):
-    mealplan_review_to_delete = get_object_or_404(
-        MealplanReview, pk=mealplanreview_id)
-    if request.method == "POST":
-        messages.success(request, "Review have been deleted!")
-        mealplan_review_to_delete.delete()
-        return redirect(reverse("mealplan_details_route",
-                                kwargs={"mealplan_id": mealplan_review_to_delete.mealplan.id,
-                                        "mealplanreview_id": mealplanreview_id}))
-    else:
-        return render(request, "reviews/delete_mealplan_review.template.html",
-                      {
-                          "mealplanreview": mealplan_review_to_delete
                       })

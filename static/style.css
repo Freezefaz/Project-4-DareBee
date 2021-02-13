@@ -1,8 +1,5 @@
 /* base template */
 body {
-    /* background-color: #0089ff; */
-    /* background-color: #5D8AA8; */
-    /* background-color: #0070b7; */
     background-image: linear-gradient(#b7e3ff, #0070b7);
     padding: 0;
     margin: 0;
@@ -14,9 +11,6 @@ body {
     background: white;
     font-family: 'Roboto Condensed', sans-serif;
     color: #d6001c;
-    /* background: #9BA2A7; */
-    /* background:#BDBDBD; */
-    /* margin-bottom: 15px; */
 }
 nav img {
     width: 50%;
@@ -31,7 +25,6 @@ nav img {
     background: darkblue;
 }
 #user-name, #cart-name {
-    /* color: #ffcd3c; */
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -55,9 +48,6 @@ h1, h2, h3 {
 
 /* welcome template */
 #principles {
-    /* background: white; */
-    /* background: #9BA2A7; */
-    /* background:#0070b7; */
     margin-bottom: 10px;
     padding: 10px;
     display: flex;
@@ -65,8 +55,6 @@ h1, h2, h3 {
     flex-direction: column;
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
-    /* color: #c62511; */
-    /* border-bottom: 5px solid black; */
 }
 
 #home-jumbo-exercise {
@@ -75,13 +63,9 @@ h1, h2, h3 {
     background-position: center;
     background-size: cover;
     text-align: center;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Roboto Condensed', sans-serif;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    /* color: black; */
-    /* color: #0089ff; */
     color: white;
-    /* max-width: 1200px; */
 }
 
 #home-jumbo-mealplan {
@@ -90,41 +74,22 @@ h1, h2, h3 {
     background-position: center;
     background-size: cover;
     text-align: center;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Roboto Condensed', sans-serif;
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    /* color: black; */
-    /* color: #0089ff; */
     color: white;
-    /* max-width: 1200px; */
-}
-.parallax {
-  /* The image used */
-  /* background-image: url('{% static "image/mealplan3.jpg"%}'); */
 
-  /* Full height */
-  /* height: 40vh;  */
-
-  /* Create the parallax scrolling effect */
-  /* background-attachment: fixed;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover; */
 }
 
 /* end of welcome template */
 
 /* Start of show exercise/mealplan template */
-/* #exercise-jumbo, #mealplan-jumbo  */
+
 .products-jumbo {
-    /* background: url("/static/image/exercise3.jpg"); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     text-align: center;
-    /* color: black; */
     font-family: 'Roboto Condensed', sans-serif;
-    /* height: 40%; */
     font-size: 1.5rem;
 }
 .products-jumbo h1 {
@@ -151,8 +116,6 @@ h1, h2, h3 {
 }
 
 .exercise_cover {
-    /* max-width: 500px;
-    max-height: 350px; */
     max-width: 100%;
     height: auto;
     min-width: 200px;
@@ -172,12 +135,10 @@ h1, h2, h3 {
 /* For exercise/mealplan details template */
 .review-top {
     display: flex;
-    /* justify-content: center; */
     text-align: center;
     flex-direction: column;
     margin: 10px;
     font-family:'Roboto Condensed', sans-serif;
-    /* color:#d6001c; */
 }
 
 .exercise-details-cover {
@@ -199,7 +160,6 @@ h1, h2, h3 {
 .review-header {
     color:#d6001c;
     background: #9BA2A7;
-    /* background: #353A40; */
 }
 /* End of exercise/mealplan details template*/
 
@@ -218,9 +178,6 @@ h1, h2, h3 {
     font-family: 'Roboto', sans-serif;
 }
 
-/* .table h1 {
-     color: white;
-} */
 /* End of checkout template */
 
 /* For All Auth templates */
@@ -237,7 +194,6 @@ h1, h2, h3 {
 /* Footer */
 footer {
     padding: 10px;
-    /* background: #9BA2A7; */
     background: white;
     font-family: 'Roboto', sans-serif;
     border-top: 5px solid black;
@@ -245,6 +201,4 @@ footer {
 .footer-items a {
     padding: 10px;
     font-size: 30px;
-    /* display: flex; */
-    /* justify-content: space-between; */
 }

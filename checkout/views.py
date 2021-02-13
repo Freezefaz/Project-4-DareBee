@@ -38,48 +38,48 @@ def checkout(request):
     mealplan_line_items = []
     all_mealplan_ids = []
 
-    if len(exercise_cart) == 0 or len(mealplan_cart) == 0:
-        # go through each line in cart
-        for key, exercise_item in exercise_cart.items():
-            # retrieve exercise by id
-            exercise_model = get_object_or_404(Exercise, pk=exercise_item["id"])
+    # go through each line in cart
+    for key, exercise_item in exercise_cart.items():
+        # retrieve exercise by id
+        exercise_model = get_object_or_404(Exercise, pk=exercise_item["id"])
 
-            # create line item for stripe
-            exercise_item = {
-                "name": exercise_model.title,
-                "amount": int(exercise_model.price * 100),
-                "quantity": exercise_item["qty"],
-                "currency": "sgd",
-            }
+        # create line item for stripe
+        exercise_item = {
+            "name": exercise_model.title,
+            "amount": int(exercise_model.price * 100),
+            "quantity": exercise_item["qty"],
+            "currency": "sgd",
+        }
 
-            exercise_line_items.append(exercise_item)
-            all_exercise_ids.append({
-                "exercise_id": exercise_model.id,
-            })
+        exercise_line_items.append(exercise_item)
+        all_exercise_ids.append({
+            "exercise_id": exercise_model.id,
+        })
 
-        # go through each line in cart
-        for key, mealplan_item in mealplan_cart.items():
-            # retrieve exercise by id
-            mealplan_model = get_object_or_404(Mealplan, pk=mealplan_item["id"])
+    # go through each line in cart
+    for key, mealplan_item in mealplan_cart.items():
+        # retrieve exercise by id
+        mealplan_model = get_object_or_404(Mealplan, pk=mealplan_item["id"])
 
-            # create line item for stripe
-            mealplan_item = {
-                "name": mealplan_model.title,
-                "amount": int(mealplan_model.price * 100),
-                "quantity": 1,
-                "currency": "sgd",
-            }
-            mealplan_line_items.append(mealplan_item)
-            all_mealplan_ids.append({
-                "mealplan_id": mealplan_model.id,
-            })
+        # create line item for stripe
+        mealplan_item = {
+            "name": mealplan_model.title,
+            "amount": int(mealplan_model.price * 100),
+            "quantity": 1,
+            "currency": "sgd",
+        }
+        mealplan_line_items.append(mealplan_item)
+        all_mealplan_ids.append({
+            "mealplan_id": mealplan_model.id,
+        })
 
-        # get current website
-        current_site = Site.objects.get_current()
-        # get the domain name
-        domain = current_site.domain
+    # get current website
+    current_site = Site.objects.get_current()
+    # get the domain name
+    domain = current_site.domain
 
-        all_line_items = exercise_line_items + mealplan_line_items
+    all_line_items = exercise_line_items + mealplan_line_items
+    if len(all_line_items) != 0:
         # create a payment session for current transaction
         session = stripe.checkout.Session.create(
             # take credit cards

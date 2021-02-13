@@ -38,7 +38,7 @@ def checkout(request):
     mealplan_line_items = []
     all_mealplan_ids = []
 
-    if exercise_cart is not None or mealplan_cart is not None:
+    if exercise_cart != 0 or mealplan_cart != 0:
         # go through each line in cart
         for key, exercise_item in exercise_cart.items():
             # retrieve exercise by id

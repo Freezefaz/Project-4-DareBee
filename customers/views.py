@@ -5,9 +5,10 @@ import products.views
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
-@login_required
+@staff_member_required
 def show_profiles(request):
     # get all customers and profiles to show on 1 page
     all_customers = User.objects.all()
@@ -58,7 +59,7 @@ def update_profile(request):
             "form": profile_form
         })
 
-@login_required
+@staff_member_required
 def delete_profile(request, profile_id):
     # delete profile base on profile
     profile_to_delete = get_object_or_404(Profile, pk=profile_id)

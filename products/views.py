@@ -58,7 +58,7 @@ def create_exercise(request):
         })
 
 
-@login_required
+@staff_member_required
 def update_exercise(request, exercise_id):
     # retrieve exercise that we are updating
     exercise_to_update = get_object_or_404(Exercise, pk=exercise_id)
@@ -77,7 +77,7 @@ def update_exercise(request, exercise_id):
             "form": exercise_form
         })
 
-@login_required
+@staff_member_required
 def delete_exercise(request, exercise_id):
     # retrieve exercise that we are deleting
     exercise_to_delete = get_object_or_404(Exercise, pk=exercise_id)
@@ -128,7 +128,7 @@ def show_mealplans(request):
     })
 
 
-@login_required
+@staff_member_required
 def create_mealplan(request):
     if request.method == "POST":
         create_form = MealplanForm(request.POST)
@@ -148,7 +148,7 @@ def create_mealplan(request):
             "form": create_form
         })
 
-@login_required
+@staff_member_required
 def update_mealplan(request, mealplan_id):
     mealplan_to_update = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":
@@ -167,7 +167,7 @@ def update_mealplan(request, mealplan_id):
             "form": mealplan_form
         })
 
-@login_required
+@staff_member_required
 def delete_mealplan(request, mealplan_id):
     mealplan_to_delete = get_object_or_404(Mealplan, pk=mealplan_id)
     if request.method == "POST":

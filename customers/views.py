@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, \
+    get_object_or_404
 from .models import Customer, Profile
 from .forms import ProfileForm
 import products.views
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
+
 
 @staff_member_required
 def show_profiles(request):
@@ -17,6 +19,7 @@ def show_profiles(request):
         "all_profiles": all_profiles,
         "all_customers": all_customers
     })
+
 
 @login_required
 def create_profile(request):
@@ -40,6 +43,7 @@ def create_profile(request):
             "form": create_form
         })
 
+
 @login_required
 def update_profile(request):
     # if customer is the requsted user he can update his own profile
@@ -59,6 +63,7 @@ def update_profile(request):
             "form": profile_form
         })
 
+
 @staff_member_required
 def delete_profile(request, profile_id):
     # delete profile base on profile
@@ -71,6 +76,7 @@ def delete_profile(request, profile_id):
         return render(request, "customers/delete_profile.template.html", {
             "profile": profile_to_delete
         })
+
 
 @login_required
 def view_user_profile(request):

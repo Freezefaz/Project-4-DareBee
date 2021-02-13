@@ -12,7 +12,8 @@ class Exercise_Purchase(models.Model):
     price = models.PositiveIntegerField(blank=False)
 
     def __str__(self):
-        return f"Purchase made for id:{self.exercise.id} by {self.customer.username} on {self.purchase_date}"
+        return f"Purchase made for id:{self.exercise.id} \
+            by {self.customer.username} on {self.purchase_date}"
 
 
 class Mealplan_Purchase(models.Model):
@@ -22,4 +23,5 @@ class Mealplan_Purchase(models.Model):
     price = models.PositiveIntegerField(blank=False)
 
     def __str__(self):
-        return f"Purchase made for id:{self.mealplan.id} by {self.customer.username} on {self.purchase_date}"
+        return f"Purchase made for id:{self.mealplan.id} \
+            by {self.customer.username} on {self.purchase_date}"

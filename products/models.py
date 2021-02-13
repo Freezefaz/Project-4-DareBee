@@ -46,4 +46,3 @@ class Mealplan(models.Model):
     # to make string
     def __str__(self):
         return self.title
-

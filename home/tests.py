@@ -1,6 +1,8 @@
 from django.test import TestCase
 
 # Create your tests here.
+
+
 class HomeTestViews(TestCase):
     def test_home_page(self):
         # simulate browswer going to URL

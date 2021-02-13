@@ -1,15 +1,15 @@
-from .forms import ExerciseForm, MealplanForm, Exercise_SearchForm, Mealplan_SearchForm
+from .forms import ExerciseForm, MealplanForm, \
+    Exercise_SearchForm, Mealplan_SearchForm
 from .models import Exercise, Mealplan
 from reviews.models import ExerciseReview
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, \
+    get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
-def index(request):
-    return render(request, "products/index_product.template.html")
 
 def show_exercise(request):
     # search function
@@ -27,13 +27,13 @@ def show_exercise(request):
         if "price" in request.GET and request.GET["price"]:
             queries = queries & Q(price=request.GET["price"])
 
-
     all_exercises = all_exercises.filter(queries)
     search_form = Exercise_SearchForm()
     return render(request, "products/show_exercise.template.html", {
         "all_exercises": all_exercises,
         "search_form": search_form
     })
+
 
 @staff_member_required
 def create_exercise(request):
@@ -76,18 +76,21 @@ def update_exercise(request, exercise_id):
             "form": exercise_form
         })
 
+
 @staff_member_required
 def delete_exercise(request, exercise_id):
     # retrieve exercise that we are deleting
     exercise_to_delete = get_object_or_404(Exercise, pk=exercise_id)
     if request.method == "POST":
-        messages.success(request, f"{exercise_to_delete.title} has been deleted!")
+        messages.success(request,
+                         f"{exercise_to_delete.title} has been deleted!")
         exercise_to_delete.delete()
         return redirect(show_exercise)
     else:
         return render(request, "products/delete_exercise.template.html", {
             "exercise": exercise_to_delete
         })
+
 
 def view_exercise_details(request, exercise_id):
     # show individual exercise details
@@ -118,7 +121,6 @@ def show_mealplans(request):
         if "price" in request.GET and request.GET["price"]:
             queries = queries & Q(price=request.GET["price"])
 
-
     all_mealplans = all_mealplans.filter(queries)
     search_form = Mealplan_SearchForm()
     return render(request, "products/show_mealplans.template.html", {
@@ -147,6 +149,7 @@ def create_mealplan(request):
             "form": create_form
         })
 
+
 @staff_member_required
 def update_mealplan(request, mealplan_id):
     mealplan_to_update = get_object_or_404(Mealplan, pk=mealplan_id)
@@ -165,6 +168,7 @@ def update_mealplan(request, mealplan_id):
         return render(request, "products/update_mealplan.template.html", {
             "form": mealplan_form
         })
+
 
 @staff_member_required
 def delete_mealplan(request, mealplan_id):

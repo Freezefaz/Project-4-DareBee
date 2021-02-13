@@ -1,8 +1,10 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, \
+    get_object_or_404
 from django.contrib import messages
 from products.models import Exercise, Mealplan
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
 
 @login_required
 def add_to_exercise_cart(request, exercise_id):
@@ -26,6 +28,7 @@ def add_to_exercise_cart(request, exercise_id):
         request.session["shopping_cart"] = cart
         return redirect(reverse("view_all_exercise_route"))
 
+
 @login_required
 def add_to_mealplan_cart(request, mealplan_id):
     # check if mealplan is not in the cart, then add
@@ -48,6 +51,7 @@ def add_to_mealplan_cart(request, mealplan_id):
                          f"{mealplan.title} already added to your cart!")
         return redirect(reverse("view_all_mealplans_route"))
 
+
 @login_required
 def view_cart(request):
     # retrieve the cart
@@ -66,6 +70,7 @@ def view_cart(request):
         "total": f"{total:.2f}"
     })
 
+
 @login_required
 def remove_from_exercise_cart(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
@@ -77,6 +82,7 @@ def remove_from_exercise_cart(request, exercise_id):
         request.session["shopping_cart"] = cart
         messages.success(request, "Exercise removed from cart successfully!")
         return redirect(reverse("view_all_exercise_route"))
+
 
 @login_required
 def remove_from_mealplan_cart(request, mealplan_id):
@@ -90,12 +96,13 @@ def remove_from_mealplan_cart(request, mealplan_id):
         messages.success(request, "Mealplan removed from cart successfully!")
         return redirect(reverse("view_all_mealplans_route"))
 
+
 @login_required
 def update_exercise_cart_quantity(request, exercise_id):
     cart = request.session.get("shopping_cart", {})
     quantity = request.POST["qty"]
     if exercise_id in cart:
-    # change the text in box to change 
+        # change the text in box to change
         cart[exercise_id]["qty"] = quantity
         print(quantity)
         messages.success(request, "Quantity has been updated!")

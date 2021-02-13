@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, \
+    get_object_or_404
 from django.conf import settings
 from products.models import Exercise, Mealplan
 from customers.models import Customer
@@ -13,12 +14,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
 #  create a unique id for each exercise in array
 class UUIDEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, UUID):
             return obj.hex
         return json.JSONEncoder.default(self, obj)
+
 
 @login_required
 def checkout(request):
@@ -96,6 +99,7 @@ def checkout(request):
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
+
 @login_required
 def checkout_success(request):
     # empty the shopping cart
@@ -103,6 +107,7 @@ def checkout_success(request):
     request.session['mealplan_shopping_cart'] = {}
     messages.success(request, "Checkout Success!")
     return redirect(reverse('home_route'))
+
 
 @login_required
 def checkout_cancelled(request):
@@ -141,7 +146,7 @@ def payment_completed(request):
 
 
 def handle_payment(session):
-    # get id from meta data to find the id 
+    # get id from meta data to find the id
     customer = get_object_or_404(User, pk=session["client_reference_id"])
     all_exercise_ids = json.loads(session["metadata"]["all_exercise_ids"])
     for exercise in all_exercise_ids:
@@ -164,6 +169,7 @@ def handle_payment(session):
         mealplan_purchase.customer = customer
         mealplan_purchase.price = mealplan_model.price
         mealplan_purchase.save()
+
 
 def view_purchases(request):
     #  get all purchase from purchase model to display on purchase template

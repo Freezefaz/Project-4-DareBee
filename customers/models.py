@@ -30,4 +30,3 @@ class Profile(models.Model):
     # make to string
     def __str__(self):
         return self.first_name + " " + self.last_name
-

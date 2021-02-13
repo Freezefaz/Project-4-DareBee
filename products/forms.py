@@ -24,6 +24,7 @@ class Exercise_SearchForm(forms.Form):
     )
     price = forms.CharField(max_length=100, required=False)
 
+
 class Mealplan_SearchForm(forms.Form):
     title = forms.CharField(max_length=100, required=False)
     mealplan_type = forms.ModelChoiceField(

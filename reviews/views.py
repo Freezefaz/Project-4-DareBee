@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, reverse, \
+    get_object_or_404
 from .models import ExerciseReview, MealplanReview
 from .forms import ExerciseReviewForm, MealplanReviewForm
 from products.models import Exercise, Mealplan

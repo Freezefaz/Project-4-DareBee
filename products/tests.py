@@ -59,6 +59,7 @@ class ExerciseTestView(TestCase):
         self.assertTemplateUsed(
             response, "products/delete_exercise.template.html")
 
+
 class MealplansTestView(TestCase):
     def test_mealplans_page(self):
         # simulate going to products page

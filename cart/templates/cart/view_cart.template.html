@@ -41,7 +41,5 @@
 {%endfor%}
 {% if cart|length or mealplan_cart|length %}
     <a class="btn btn-success btn-sm mt-3 mb-3" href="{%url 'checkout_route'%}">Checkout</a>
-{% else %}
-    <a class="btn btn-danger btn-sm mt-3 mb-3" href="#">Please Add Product</a>
 {% endif %}
 {%endblock%}

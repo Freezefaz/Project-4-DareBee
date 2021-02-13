@@ -55,7 +55,7 @@
                             <a class="nav-link" style="color: #d6001c" href="{% url 'account_login' %}">Sign In</a>
                         </li>
                     {% endif %}
-                    {% if request.user.is_superuser %}
+                    {% if request.user.is_staff %}
                     <li class="nav-item">
                             <a class="nav-link" style="color: #d6001c" href="{% url 'show_profiles_route' %}">All Profiles</a>
                     </li>

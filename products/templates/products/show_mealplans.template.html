@@ -8,7 +8,7 @@
 
 {%block content%}
 
-{% if request.user.is_superuser %}
+{% if request.user.is_staff %}
     <a class="btn btn-primary mt-3 mb-3" href="{% url 'create_mealplan_route' %}">Create Mealplan</a>
  {%endif%}
     <div id="mealplan-jumbo" class="products-jumbo jumbotron jumbotron-fluid" style="background-image: url('{% static "image/mealplan7.jpg"%}')">

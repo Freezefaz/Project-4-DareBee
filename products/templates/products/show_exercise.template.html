@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    {% if request.user.is_superuser %}
+    {% if request.user.is_staff %}
         <a class="btn btn-primary mt-3 mb-3" href="{% url 'create_exercise_route' %}">Create Exercise</a>
     {%endif%}
 

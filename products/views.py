@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse, redirect, reverse, get_object
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import staff_member_required
 
 # Create your views here.
 
@@ -35,7 +36,7 @@ def show_exercise(request):
         "search_form": search_form
     })
 
-@login_required
+@staff_member_required
 def create_exercise(request):
     if request.method == "POST":
         create_form = ExerciseForm(request.POST)

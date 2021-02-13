@@ -105,8 +105,8 @@ The User has a one to many relationships to Exercise, ExerciseReview, Mealplan a
 
 To test as an admin:
 ```
-Admin Account:
-- Login: admin
+Staff Account:
+- Login: staff
 - Password: superuser123
 ```
 To test as a customer:
@@ -147,7 +147,6 @@ All automated testing is correct at time of test.
 ### Known Bugs
 - If a user click on view profile before creating a profile it will result in Not Found
 - User can make multiple profile which should not be allowed
-- If an empty cart is checked out it will result in a Server Error 500
 
 ## Deployment
 This website is deployed on Heroku. The URL for the deployed website is https://fa-darebee.herokuapp.com/

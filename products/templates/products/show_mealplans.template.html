@@ -36,7 +36,7 @@
         <div class="card-header">
             <h5><a href="{% url 'mealplan_details_route' mealplan_id=each_mealplan.id %}">{{each_mealplan.title}}</a></h5>
             <p>Click here for reviews</p>
-            {% if request.user.is_superuser %}
+            {% if request.user.is_staff %}
             <a class="btn btn-primary" href="{% url 'update_mealplan_route' mealplan_id=each_mealplan.id%}">Update</a>
             <a class="btn btn-danger" href="{% url 'delete_mealplan_route' mealplan_id=each_mealplan.id%}">Delete</a>
             {%endif%}
